@@ -1,0 +1,22 @@
+"DOTAUnits"
+{
+
+
+	"test_unit_one"
+	{
+		"BaseClass"			"npc_dota_creature"
+		"Model"				""
+	}
+
+	"test_unit_three"
+	{
+		"BaseClass"			"npc_dota_creature"
+		"Model"				""
+	}
+
+	"test_unit_two"
+	{
+		"BaseClass"			"npc_dota_creature"
+		"Model"				""
+	}
+}

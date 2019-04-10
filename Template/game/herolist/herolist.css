@@ -1,0 +1,52 @@
+
+textarea
+{
+width:100%;
+height:100%;
+}
+
+.hero_kinds {
+    text-align: center;
+}
+
+.hero_kinds .strength {
+    height:60px; 
+    border-bottom:3px solid #B9500B; 
+    font-size:140%;
+}
+.hero_kinds .agility {
+    height: 60px;
+    border-bottom: 3px solid #167C13;
+    font-size: 140%;
+}
+.hero_kinds .intelligence {
+    height: 60px;
+    border-bottom: 3px solid #257DAE;
+    font-size: 140%;
+}
+
+
+.hero-box {
+    width:150px; height:84px; display:inline-block; overflow:hidden; margin:1px;
+    cursor: pointer;
+}
+
+.hero-box.not-active img {
+    opacity:0.4;
+    filter:alpha(opacity=40); /* 针对 IE8 以及更早的版本 */
+}
+
+.hero-box .name-box {
+    pointer-events:none; position:relative; width:150px; height:84px; top:-84px; display:flex; justify-content:center; align-items:flex-end; line-height:30px;
+}
+
+.hero-box .name-box .hero-name{
+    font-size:17px; color:white; text-shadow:-1px 0 0.2em black, 0 1px 0.2em black, 1px 0 0.2em black, 0 -1px 0.2em black;
+}
+
+.hero-box .active-box {
+    pointer-events:none; position:relative; 
+    width:100%; height:100%;  top:-172px; display:flex; 
+    justify-content:center; align-items:flex-end; 
+    /* background-color: #B9500B; */
+}

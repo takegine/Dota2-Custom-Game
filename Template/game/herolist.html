@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hero List</title>
+
+    <script src="herolist/vue.js"></script>
+    <!-- <script src="herolist/vue.min.js"></script> -->
+
+    <script src="herolist/heroes.js"></script>
+    <link href="herolist/herolist.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Heroes</h1>
+    <div class="content-text" id="app">
+        <div>
+            <button v-on:click="import_code">导入</button>
+            <button v-on:click="export_code">导出</button>
+
+            <div>
+                <textarea style="resize:none"  rows="10" cols="100" 
+                    v-model="code" ></textarea>
+            </div>
+        </div>
+        <div>
+            <div class="hero_kinds">
+                <div class="strength">
+                    <span style="white-space:nowrap">
+                        <img src="herolist/icon/30px-Strength_attribute_symbol.png" width="30" height="30" class="noprint">
+                        Strength
+                    </span>
+                </div>
+                <div>
+                    <template v-for="hero in strength">
+                        <div class="hero-box" v-bind:class="{ 'not-active': !is_select(hero) }" 
+                            v-on:click="on_click(hero)">
+                            <div style="position:relative;">
+                                <img v-bind:src="get_image(hero)" width="150" height="84" >
+                            </div>
+                            <div class="name-box" >
+                                <span class="hero-name"> {{ get_name(hero) }}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="agility">
+                    <span style="white-space:nowrap">
+                        <img src="herolist/icon/30px-Agility_attribute_symbol.png" width="30" height="30" class="noprint">
+                        Agility
+                    </span>
+                </div>
+                <div>
+                    <template v-for="hero in agility">
+                        <div class="hero-box" v-bind:class="{ 'not-active': !is_select(hero) }" 
+                            v-on:click="on_click(hero)">
+                            <div style="position:relative;">
+                                <img v-bind:src="get_image(hero)" width="150" height="84" >
+                            </div>
+                            <div class="name-box" >
+                                <span class="hero-name"> {{ get_name(hero) }}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="intelligence">
+                    <span style="white-space:nowrap">
+                        <img src="herolist/icon/30px-Intelligence_attribute_symbol.png" width="30" height="30" class="noprint">
+                        Intelligence
+                    </span>
+                </div>
+                <div>
+                    <template v-for="hero in intelligence">
+                        <div class="hero-box" v-bind:class="{ 'not-active': !is_select(hero) }" 
+                            v-on:click="on_click(hero)">
+                            <div style="position:relative;">
+                                <img v-bind:src="get_image(hero)" width="150" height="84" >
+                            </div>
+                            <div class="name-box" >
+                                <span class="hero-name"> {{ get_name(hero) }}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="herolist/herolist.js"></script>
+</body>
+</html>

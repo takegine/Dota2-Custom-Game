@@ -1,0 +1,19 @@
+"DOTAAbilities"
+{
+
+	"test_item_one"
+	{
+		"BaseClass"						"item_datadriven"
+		"ID"							"71111"
+	}
+	"test_item_three"
+	{
+		"BaseClass"						"item_datadriven"
+		"ID"							"71113"
+	}
+	"test_item_two"
+	{
+		"BaseClass"						"item_datadriven"
+		"ID"							"71112"
+	}
+}

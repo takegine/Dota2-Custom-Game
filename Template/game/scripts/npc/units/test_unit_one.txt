@@ -1,0 +1,7 @@
+
+
+	"test_unit_one"
+	{
+		"BaseClass"			"npc_dota_creature"
+		"Model"				""
+	}

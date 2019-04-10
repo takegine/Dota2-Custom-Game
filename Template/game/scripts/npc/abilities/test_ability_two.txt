@@ -1,0 +1,8 @@
+
+
+	"test_ability_two"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NONE"
+	}

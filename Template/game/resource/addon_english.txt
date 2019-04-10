@@ -1,0 +1,27 @@
+"lang"
+{
+	"Language"		"English"
+	"Tokens"
+	{	
+		
+
+	"addon_game_name"							"Addon Game Name"
+	
+
+
+	"ability_test_three"			"ability_test_three"
+
+
+	"ability_test_one"			"ability_test_one"
+
+
+	"ability_test_two"			"ability_test_two"
+
+
+	"item_test_one"			"item_test_one"
+
+
+	"item_test_two"			"item_test_two"	
+	
+	}
+}
