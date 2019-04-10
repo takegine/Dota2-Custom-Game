@@ -1,0 +1,33 @@
+
+	//=================================================================================================================
+	// Riki: Backstab					背刺
+	//=================================================================================================================
+	"mjz_riki_backstab"
+	{
+		"BaseClass"						"ability_lua"	// "ability_datadriven"
+		"ScriptFile"					"abilities/hero_riki/mjz_riki_backstab.lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		// "AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"			"mjz_riki_backstab"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"agility_damage"			"75 100 125 150"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"health_regen"				"6 8 10 12"
+			}
+		}
+
+		"precache"
+		{
+	 		"particle"		"particles/units/heroes/hero_riki/riki_backstab.vpcf"
+		}
+	}
