@@ -106,7 +106,8 @@ function modifier_effect:IsPurgable() return true end
 function modifier_effect:IsDebuff() return true end
 
 function modifier_effect:GetEffectName()
-    return "particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear.vpcf"
+    -- return "particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear.vpcf"
+    return "particles/units/heroes/hero_night_stalker/nightstalker_crippling_fear_smoke.vpcf"
 end
 function modifier_effect:GetEffectAttachType()
     return PATTACH_OVERHEAD_FOLLOW
