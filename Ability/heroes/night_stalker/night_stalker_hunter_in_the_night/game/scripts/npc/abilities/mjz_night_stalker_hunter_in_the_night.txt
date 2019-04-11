@@ -1,0 +1,27 @@
+
+	//=================================================================================================================
+	// Night Stalker: Hunter in the Night	暗夜猎影
+	//=================================================================================================================
+	"mjz_night_stalker_hunter_in_the_night"
+	{
+		"BaseClass"						"ability_lua"	// "ability_datadriven"
+		"ScriptFile"					"abilities/hero_night_stalker/mjz_night_stalker_hunter_in_the_night.lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"mjz_night_stalker_hunter_in_the_night"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"bonus_movement_speed_pct"			"22 28 34 40"
+			}
+			"02"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"bonus_attack_speed"				"30 50 70 90"
+				"LinkedSpecialBonus"				"special_bonus_unique_night_stalker_2"
+			}
+		}
+	}
+
