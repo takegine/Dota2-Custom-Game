@@ -31,8 +31,10 @@ if IsServer() then
 
     function modifier_counter:OnAttackLanded(keys)
         local attacker = keys.attacker
+        local target = keys.target
         
-		if attacker == self:GetParent() then
+        if attacker == self:GetParent() then
+            if attacker:GetTeam() == target:GetTeam() then return nil end
 			if attacker:PassivesDisabled() then return nil end
 
 			local ability = self:GetAbility()
