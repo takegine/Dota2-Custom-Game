@@ -12,6 +12,7 @@ Holdout Example
 ]]
 
 require("lib.timers")
+require("utils/mjz_util")
 
 require('systems/courier_system')
 
@@ -170,6 +171,9 @@ function MainGame:OnGameInProgress( )
 
 	    self:CreateSystems()
 
+		Timers:CreateTimer(5, function( )
+			self:_OnStartGame()
+		end)
 	end
 end
 
@@ -179,18 +183,6 @@ function MainGame:OnHeroInGameFirstTime( hero )
     if not hero.next_spawn then
         hero.next_spawn = true;
 
-        if IsInToolsMode() then
-            self:_Test_StartGame(hero)
-        else
-            local currentGold = hero:GetGold()
-            local newGold = currentGold + START_GOLD
-            hero:SetGold(newGold, false)	
-
-            if hero:HasAnyAvailableInventorySpace() then
-                hero:AddItemByName("item_blink")
-                hero:AddItemByName("item_boots")
-            end	
-        end
     end
 end
 
@@ -426,6 +418,23 @@ end
 function MainGame:_RegisterCommand( )
     -- Custom console commands
     Convars:RegisterCommand( "test_func", function(...) return print( ... ) end, "Test Function.", FCVAR_CHEAT )
+end
+
+function MainGame:_OnStartGame(  )
+	CallAllHeroFunc(function(hero)
+		if IsInToolsMode() then
+			self:_Test_StartGame(hero)
+		else
+			local currentGold = hero:GetGold()
+			local newGold = currentGold + START_GOLD
+			hero:SetGold(newGold, false)	
+
+			if hero:HasAnyAvailableInventorySpace() then
+				hero:AddItemByName("item_blink")
+				hero:AddItemByName("item_boots")
+			end	
+		end
+	end)
 end
 
 
