@@ -1,7 +1,5 @@
-if modifier_mjz_templar_assassin_proficiency_debuff == nil then
-	modifier_mjz_templar_assassin_proficiency_debuff = class ({})
-end
 
+modifier_mjz_templar_assassin_proficiency_debuff = class ({})
 local modifier_class = modifier_mjz_templar_assassin_proficiency_debuff
 
 function modifier_class:IsHidden()
@@ -25,19 +23,7 @@ function modifier_class:OnRefresh(kv)		-- 当执行 ForceRefresh() 时，触发�
 end
 
 function modifier_class:OnCreated( kv )
-	-- if not IsServer() then return end
-
-	self:_Init(kv)
-	
-	if IsInToolsMode() and true then
-		print("modifier_mjz_templar_assassin_proficiency_debuff : OnCreated")
-		for k,v in pairs(kv) do
-			print("    ",k,v)
-		end
-
-		print("    ", "armor_bonus", self.armor_bonus)
-	end
-		
+	self:_Init(kv)	
 end
 
 function modifier_class:DeclareFunctions()
@@ -49,7 +35,6 @@ function modifier_class:DeclareFunctions()
 end
 
 function modifier_class:GetModifierPhysicalArmorBonus(kv)
-	-- if not self:GetParent():IsBuilding() then return end
 	return self.armor_bonus
 end
 
