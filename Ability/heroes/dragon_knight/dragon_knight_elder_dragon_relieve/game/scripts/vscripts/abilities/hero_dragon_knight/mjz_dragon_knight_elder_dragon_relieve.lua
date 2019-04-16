@@ -1,95 +1,137 @@
 
-function OnSpellStart( event )
-	if not IsServer() then return nil end
+local THIS_LUA = "abilities/hero_dragon_knight/mjz_dragon_knight_elder_dragon_relieve.lua"
+local MODIFIER_RELIEVE_NAME = 'modifier_mjz_dragon_knight_elder_dragon_relieve'
+local MODIFIER_HEALTH_NAME = 'modifier_mjz_dragon_knight_elder_dragon_relieve_health'
 
-	local caster = event.caster
-	local ability = event.ability
+local TARGET_MODIFIER_LIST = {
+	'modifier_dragon_knight_dragon_form',
+	'modifier_dragon_knight_corrosive_breath',
+	'modifier_dragon_knight_splash_attack',
+	'modifier_dragon_knight_frost_breath',
+
+}
+
+LinkLuaModifier(MODIFIER_RELIEVE_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_HEALTH_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
+
+------------------------------------------------------------------------------------------
+
+mjz_dragon_knight_elder_dragon_relieve = class({})
+local ability_class = mjz_dragon_knight_elder_dragon_relieve
+
+function ability_class:GetIntrinsicModifierName()
+    return MODIFIER_RELIEVE_NAME
+end
+
+if IsServer() then
+	function ability_class:OnSpellStart(  )
+		local caster = self:GetCaster()
+		local ability = self
+		local unit = caster
 	
-	local unit = caster
-	local modifier_health_name = 'modifier_mjz_dragon_knight_elder_dragon_relieve_health'
-
-	local modifier_dragon_form = unit:FindModifierByName('modifier_dragon_knight_dragon_form')
-	local modifier_corrosive_breath = unit:FindModifierByName('modifier_dragon_knight_corrosive_breath')
-	local modifier_splash_attack = unit:FindModifierByName('modifier_dragon_knight_splash_attack')
-	local modifier_frost_breath = unit:FindModifierByName('modifier_dragon_knight_frost_breath')
-
-	if  modifier_dragon_form then
-		modifier_dragon_form:SetDuration(0.1, false)
-		if modifier_corrosive_breath then
-			modifier_corrosive_breath:SetDuration(0.1, false)
-		end
-		if modifier_splash_attack then
-			modifier_splash_attack:SetDuration(0.1, false)
-		end
-		if modifier_frost_breath then
-			modifier_frost_breath:SetDuration(0.1, false)
-		end
-
-		if unit:HasModifier(modifier_health_name) then
-			unit:RemoveModifierByName(modifier_health_name)	
+		if HasModifierList(unit, {'modifier_dragon_knight_dragon_form'}) then
+			SetModifierListDuration(unit, TARGET_MODIFIER_LIST, 0.1)
+	
+			if unit:HasModifier(MODIFIER_HEALTH_NAME) then
+				unit:RemoveModifierByName(MODIFIER_HEALTH_NAME)	
+			end
 		end
 	end
 end
 
-function OnCreated( event )
-	if not IsServer() then return nil end
 
-	local caster = event.caster
-	local ability = event.ability
+------------------------------------------------------------------------------------------
 
-end
 
-function OnIntervalThink( event )
-	if not IsServer() then return nil end
+modifier_mjz_dragon_knight_elder_dragon_relieve = class({})
+local modifier_relieve = modifier_mjz_dragon_knight_elder_dragon_relieve
 
-	local caster = event.caster
-	local ability = event.ability
-	
-	local unit = caster
-	local modifier_health_name = 'modifier_mjz_dragon_knight_elder_dragon_relieve_health'
+function modifier_relieve:IsHidden() return true end
+function modifier_relieve:IsPurgable() return false end
 
-	local modifier_dragon_form = unit:FindModifierByName('modifier_dragon_knight_dragon_form')
-	local modifier_corrosive_breath = unit:FindModifierByName('modifier_dragon_knight_corrosive_breath')
-	local modifier_splash_attack = unit:FindModifierByName('modifier_dragon_knight_splash_attack')
-	local modifier_frost_breath = unit:FindModifierByName('modifier_dragon_knight_frost_breath')
+if IsServer() then
+	function modifier_relieve:OnCreated(table)
+		local caster = self:GetCaster()
+		local parent = self:GetParent()
+		local ability = self:GetAbility()
 
-	if unit:HasScepter() and modifier_dragon_form then
-		modifier_dragon_form:SetDuration(60.0, false)
-		if modifier_corrosive_breath then
-			modifier_corrosive_breath:SetDuration(60.0, false)
-		end
-		if modifier_splash_attack then
-			modifier_splash_attack:SetDuration(60.0, false)
-		end
-		if modifier_frost_breath then
-			modifier_frost_breath:SetDuration(60.0, false)
-		end
-
-		if not unit:HasModifier(modifier_health_name) then
-			unit:AddNewModifier(unit, ability, modifier_health_name, {})
-			-- ability:ApplyDataDrivenModifier(ability, unit, modifier_health_name, {})
-		end
-	else
-		unit:RemoveModifierByName(modifier_health_name)	
+		local think_interval = ability:GetSpecialValueFor('think_interval')
+		self:StartIntervalThink(think_interval)
 	end
+
+	function modifier_relieve:OnIntervalThink()
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local unit = self:GetParent()
+
+		if unit:HasScepter() and self:InShapeshift() then
+			self:UpdateDuration()
+			if not unit:HasModifier(MODIFIER_HEALTH_NAME) then
+				unit:AddNewModifier(caster, ability, MODIFIER_HEALTH_NAME, {})
+			end
+		else
+			unit:RemoveModifierByName(MODIFIER_HEALTH_NAME)	
+		end
+	end
+	
+	function modifier_relieve:InShapeshift( )
+		local ability = self:GetAbility()
+		local unit = self:GetParent()
+		return HasModifierList(unit, {'modifier_dragon_knight_dragon_form'})
+	end
+
+	function modifier_relieve:UpdateDuration( )
+		local ability = self:GetAbility()
+		local unit = self:GetParent()
+		local duration = ability:GetSpecialValueFor('duration_scepter')
+
+		SetModifierListDuration(unit, TARGET_MODIFIER_LIST, duration)
+	end
+
 end
 
---------------------------------------------------------------------------------------------
-
-LinkLuaModifier("modifier_mjz_dragon_knight_elder_dragon_relieve_health", "abilities/hero_dragon_knight/mjz_dragon_knight_elder_dragon_relieve.lua", LUA_MODIFIER_MOTION_NONE)
+------------------------------------------------------------------------------------------
 
 modifier_mjz_dragon_knight_elder_dragon_relieve_health = class({})
-function modifier_mjz_dragon_knight_elder_dragon_relieve_health:IsHidden()
-    return true
-end
-function modifier_mjz_dragon_knight_elder_dragon_relieve_health:DeclareFunctions()
-    local funcs = {
+local modifier_health = modifier_mjz_dragon_knight_elder_dragon_relieve_health
+
+function modifier_health:IsHidden() return true end
+function modifier_health:IsPurgable() return false end
+
+function modifier_health:DeclareFunctions()
+    return {
         MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE
     }
-    return funcs
 end
-function modifier_mjz_dragon_knight_elder_dragon_relieve_health:GetModifierHealthRegenPercentage( params )
-	return -1.0
+function modifier_health:GetModifierHealthRegenPercentage( params )
+	return self:GetAbility():GetSpecialValueFor('health_drain_per_second_scepter')
 end
 
+
+------------------------------------------------------------------------------------------
+
+function HasModifierList( unit, modifier_name_list )
+	for _,modifier_name in pairs(modifier_name_list) do
+		if not unit:HasModifier(modifier_name) then
+			return false
+		end
+	end
+	return true
+end
+
+function SetModifierListDuration( unit, modifier_name_list, duration )
+	for _,modifier_name in pairs(modifier_name_list) do
+		local modifier = unit:FindModifierByName(modifier_name)
+		if modifier then
+			modifier:SetDuration(duration, true)
+		end
+	end
+end
+
+function SetModifierDuration( unit, modifier_name, duration )
+	local modifier = unit:FindModifierByName(modifier_name)
+	if modifier then
+		modifier:SetDuration(duration, true)
+	end
+end
 
