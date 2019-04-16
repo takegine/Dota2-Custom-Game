@@ -101,12 +101,6 @@ if IsServer() then
 		if not caster:HasModifier(modifier_heap_name) then
 			caster:AddNewModifier(caster, ability, modifier_heap_name, {})
 		end
-
-		-- 删除默认的 Modifier 
-		local modifier_silencer_int_steal = caster:FindModifierByName('modifier_silencer_int_steal')
-		if modifier_silencer_int_steal then
-			modifier_silencer_int_steal:Destroy()
-		end
 	end
 
 end

@@ -17,7 +17,6 @@ function modifier_class:GetTexture()
 	return self:GetAbility():GetAbilityTextureName()
 end
 
-
 function modifier_class:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
@@ -26,6 +25,7 @@ function modifier_class:DeclareFunctions()
 	}
 	if IsServer() then
 		table.insert( funcs, MODIFIER_EVENT_ON_HERO_KILLED)
+		table.insert( funcs, MODIFIER_EVENT_ON_RESPAWN)
 	end
 	return funcs
 end
@@ -55,6 +55,7 @@ function modifier_class:OnCreated( kv )
     self.heap_type = self.heap_type or 1
 	if IsServer() then
 		self:CalculateStatBonus()
+		self:RemoveModifierIntSteal()
 	end
 end
 
@@ -66,6 +67,10 @@ function modifier_class:OnRefresh( kv )
 end
 
 if IsServer() then
+	function modifier_class:OnRespawn( )
+		self:CalculateStatBonus()
+		self:RemoveModifierIntSteal()
+	end
 
 	function modifier_class:OnHeroKilled(keys)
 		local ability = self:GetAbility()
@@ -184,6 +189,15 @@ if IsServer() then
 			ParticleManager:SetParticleControl(minusIntParticle, 1, Vector(10 + intellectDifference, 0, 0))
 			ParticleManager:ReleaseParticleIndex(minusIntParticle)
 		]]
+	end
+
+	-- 删除默认的 Modifier 
+	function modifier_class:RemoveModifierIntSteal(  )
+		local caster = self:GetCaster()
+		local modifier = caster:FindModifierByName('modifier_silencer_int_steal')
+		if modifier then
+			modifier:Destroy()
+		end
 	end
 end
 
