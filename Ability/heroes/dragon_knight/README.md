@@ -2,5 +2,5 @@
 
 
 
-### [解除龙形态](dragon_knight_elder_dragon_relieve/README.md)
+### [解除变身](dragon_knight_elder_dragon_relieve/README.md)
 
