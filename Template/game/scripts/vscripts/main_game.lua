@@ -12,6 +12,7 @@ Holdout Example
 ]]
 
 require("lib.timers")
+require("utils/client_util")
 require("utils/mjz_util")
 
 require('systems/courier_system')
