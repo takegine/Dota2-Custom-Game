@@ -1,6 +1,20 @@
 # 狂战士之吼
 
-![mjz_centaur_return](game/resource/flash3/images/spellicons/mjz_axe_berserkers_call.png)
+![](game/resource/flash3/images/spellicons/mjz_axe_berserkers_call.png)
+
+斧王嘲讽附近的敌方单位，强迫他们攻击自己，同时获得额外护甲。
 
 
+
+**范围**：300 (天赋 +100)
+
+**基础护甲加成**：10
+
+**百分比护甲加成**：50%
+
+**持续时间**：2.0/2.4/2.8/3.2
+
+**无视魔法免疫**：是
+
+**能否驱散**：否
 
