@@ -174,6 +174,19 @@ function create_popup(data)
 	ParticleManager:ReleaseParticleIndex(particle)
 end
 
+function create_popup_by_damage_type(data, ability)
+    local damage_type = ability:GetAbilityDamageType()
+    if damage_type == DAMAGE_TYPE_PHYSICAL then
+        data.color = Vector(174, 47, 40)
+    elseif damage_type == DAMAGE_TYPE_MAGICAL then
+        data.color = Vector(91, 147, 209)
+    elseif damage_type == DAMAGE_TYPE_PURE then
+        data.color = Vector(216, 174, 83)
+    else
+        data.color = Vector(255, 255, 255)
+    end
+    create_popup(data)
+end
 
 
 -- 是否学习了指定天赋技能
