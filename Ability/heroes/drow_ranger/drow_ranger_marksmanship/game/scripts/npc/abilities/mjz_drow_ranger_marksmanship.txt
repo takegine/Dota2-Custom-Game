@@ -19,12 +19,12 @@
 			"01"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"bonus_agility"					"35 55 75"
+				"bonus_agility"					"20 40 60"
 			}
 			"02"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"chance_1x"						"20 30 40"
+				"chance_1x"						"15 22 30"
 			}
 			"03"
 			{

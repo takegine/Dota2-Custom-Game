@@ -6,13 +6,13 @@
 
 Drow's experiences in battle grant her a chance to launch arrows with incredible accuracy and effectiveness. Dealing additional damage based on her Attack Damage.
 
-**1X触发几率**：20%/30%/40%
+**1X触发几率**：15%/22%/30%
 
 **2X触发几率**：10%/15%/20%
 
 **3X触发几率**：5%/7%/10%
 
-**敏捷加成**：35/55/75
+**敏捷加成**：20/40/60
 
 **分裂箭矢搜索范围**：0（神杖 375）
 
