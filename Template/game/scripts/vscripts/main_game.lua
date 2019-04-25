@@ -11,7 +11,7 @@ Holdout Example
 		"b"		Boolean
 ]]
 
-require("lib.timers")
+require("lib/timers_v1_05")
 require("utils/client_util")
 require("utils/mjz_util")
 
