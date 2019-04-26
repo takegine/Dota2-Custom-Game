@@ -5,6 +5,9 @@ function ReturnDamage( event )
 	local caster = event.caster
 	local attacker = event.attacker
 	local ability = event.ability
+	
+	if caster:IsIllusion() then return nil end
+	
 	local caster_str = caster:GetStrength()
 	local str_return = ability:GetLevelSpecialValueFor( "strength_pct" , ability:GetLevel() - 1  ) * 0.01
 	local damage = ability:GetLevelSpecialValueFor( "return_damage" , ability:GetLevel() - 1  )
