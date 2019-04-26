@@ -32,6 +32,8 @@ function ActionDamageToTarget( event )
 	local target = event.target
 	local attacker = caster
 	local ability = event.ability
+	
+	if caster:IsIllusion() then return nil end
 
 	local caster_strength = caster:GetStrength()
     local damage_type = ability:GetAbilityDamageType()
