@@ -1,9 +1,11 @@
 
+local THIS_LUA = "abilities/hero_drow_ranger/mjz_drow_ranger_marksmanship.lua"
+local MODIFIER_LUA = "modifiers/hero_drow_ranger/modifier_mjz_drow_ranger_marksmanship_thinker.lua"
 local MODIFIER_INIT_NAME = 'modifier_mjz_drow_ranger_marksmanship'
 local MODIFIER_THINKER_NAME = 'modifier_mjz_drow_ranger_marksmanship_thinker'
 
-LinkLuaModifier(MODIFIER_INIT_NAME,"abilities/hero_drow_ranger/mjz_drow_ranger_marksmanship.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier(MODIFIER_THINKER_NAME,"modifiers/hero_drow_ranger/modifier_mjz_drow_ranger_marksmanship_thinker.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_INIT_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_THINKER_NAME, MODIFIER_LUA, LUA_MODIFIER_MOTION_NONE)
 
 ---------------------------------------------------------------------------------------
 
@@ -15,25 +17,116 @@ function ability_class:GetIntrinsicModifierName()
 end
 
 if IsServer() then
-    function ability_class:OnProjectileHit(target, location)
-		if target and target:IsAlive() then
-            local caster = self:GetCaster()
-			if caster:HasScepter() and caster:IsRangedAttacker() then
-				local damage_reduction = self:GetSpecialValueFor("damage_reduction_scepter")
-				local damage = caster:GetAverageTrueAttackDamage(target) * (damage_reduction / 100.0)
+	-- 分裂箭
+	function ability_class:OnProjectileHit(target, location)
+		local caster = self:GetCaster()
+		if caster:IsIllusion() then return nil end
+		if not caster:IsRangedAttacker() then return nil end
+		if not caster:HasScepter() then return nil end
 
-				ApplyDamage({
-					ability = self,
-					attacker = caster,
-					victim = target,				
-					damage = damage,
-					damage_type = DAMAGE_TYPE_PHYSICAL,
-				})
-			end
+		if target and target:IsAlive() then
+			local damage_reduction = self:GetSpecialValueFor("damage_reduction_scepter")
+			local damage = caster:GetAverageTrueAttackDamage(target) * (damage_reduction / 100.0)
+
+			ApplyDamage({
+				ability = self,
+				attacker = caster,
+				victim = target,				
+				damage = damage,
+				damage_type = DAMAGE_TYPE_PHYSICAL,
+			})
         end
 
         return true
-    end
+	end
+		
+	function ability_class:OnProjectileHit_ExtraData(target, pos, keys)
+		local ability = self
+		local caster = self:GetCaster()
+		if caster:IsIllusion() then return nil end
+		if not caster:IsRangedAttacker() then return nil end
+	
+		local marksmanship_attack = keys.marksmanship_attack
+		if marksmanship_attack then
+			ability:_ApplyDamage(target, marksmanship_attack)
+		end
+	end
+
+	function ability_class:_FirtAbilityEffect(attacker, target)
+		local ability = self
+        local chance_1x = ability:GetSpecialValueFor("chance_1x")
+        local chance_2x = ability:GetSpecialValueFor("chance_2x")
+        local chance_3x = ability:GetSpecialValueFor("chance_3x")
+
+		local marksmanship_attack = 0
+        if RollPercentage(chance_3x) then
+			marksmanship_attack = 3
+        elseif RollPercentage(chance_2x) then
+            marksmanship_attack = 2
+        elseif RollPercentage(chance_1x) then
+			marksmanship_attack = 1
+		end
+
+		local projectile_speed = attacker:GetProjectileSpeed()
+		local info = {
+			Target = target,
+			Source = attacker,
+			Ability = ability,	
+			EffectName = "particles/units/heroes/hero_drow/drow_marksmanship_attack.vpcf",
+			iMoveSpeed = projectile_speed,
+			vSourceLoc = attacker:GetAbsOrigin(),
+			bDrawsOnMinimap = false,
+			bDodgeable = true,
+			bIsAttack = true,
+			bVisibleToEnemies = true,
+			bReplaceExisting = false,
+			flExpireTime = GameRules:GetGameTime() + 60,
+			bProvidesVision = false,
+			ExtraData = {marksmanship_attack = marksmanship_attack}
+		}
+		if marksmanship_attack > 0 then
+			ProjectileManager:CreateTrackingProjectile(info)
+		end
+
+		return marksmanship_attack
+	end
+
+	function ability_class:_ApplyDamage(target, marksmanship_attack)
+		local ability = self
+		local caster = self:GetCaster()
+		local attacker = caster
+
+		if marksmanship_attack then
+			local damage = 0
+			local attack_damage = caster:GetAverageTrueAttackDamage(target)
+			if marksmanship_attack == 3 then
+				damage = attack_damage * 3
+			elseif marksmanship_attack == 2 then
+				damage = attack_damage * 2
+			elseif marksmanship_attack == 1 then
+				damage = attack_damage * 1
+			end
+
+			if marksmanship_attack > 0 then
+				local damage_table = {
+					attacker = attacker,
+					victim = target,
+					ability = ability,
+					damage = damage,
+					damage_type = ability:GetAbilityDamageType(),
+				}
+				ApplyDamage(damage_table)
+	
+				create_popup_by_damage_type({
+					target = target,
+					value = damage,
+					color = nil,
+					type = "damage"
+				}, ability) 
+			end
+		end
+	end
+
 end
 
 ---------------------------------------------------------------------------------------
@@ -41,9 +134,10 @@ end
 modifier_mjz_drow_ranger_marksmanship = class({})
 local modifier_class = modifier_mjz_drow_ranger_marksmanship
 
-function modifier_class:IsPassive() return false end
+function modifier_class:IsPassive() return true end
 function modifier_class:IsHidden() return true end
 function modifier_class:IsPurgable() return false end
+function modifier_class:RemoveOnDeath() return false end
 
 function modifier_class:DeclareFunctions()
 	local funcs = {
@@ -59,16 +153,14 @@ end
 
 function modifier_class:OnAttack(keys)
 	if IsServer() then
+		self:_CheckThinker()
 		self:_OnAttack(keys)
 	end
 end
 
 if IsServer() then
 	function modifier_class:OnCreated(table)
-		local caster = self:GetCaster()
-		local ability = self:GetAbility()
-		local parent = self:GetParent()
-		parent:AddNewModifier(caster, ability, MODIFIER_THINKER_NAME, {})
+		self:_CheckThinker()
 	end
 	
 	function modifier_class:OnDestroy()
@@ -118,6 +210,15 @@ if IsServer() then
 
 	end	
 
+	function modifier_class:_CheckThinker( )
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local parent = self:GetParent()
+
+		if not parent:HasModifier(MODIFIER_THINKER_NAME) then
+			parent:AddNewModifier(caster, ability, MODIFIER_THINKER_NAME, {})		
+		end
+	end
 end
 
 
@@ -185,3 +286,71 @@ function TargetIsFriendly(caster, target )
 	local ufResult = UnitFilter(target, nTargetTeam, nTargetType, nTargetFlags, nTeam)
 	return ufResult == UF_SUCCESS
 end
+
+
+--[[
+    A quick function to create popups.
+    Example:
+    create_popup({
+        target = target,
+        value = value,
+        color = Vector(255, 20, 147),
+        type = "spell_custom"
+	}) 
+	伤害类型的颜色：
+		物理：Vector(174, 47, 40)
+		魔法：Vector(91, 147, 209)
+		纯粹：Vector(216, 174, 83)
+	spell_custom: 
+		block | crit | damage | evade | gold | heal | mana_add | mana_loss | miss | poison | spell | xp
+	Color:	
+		red 	={255,0,0},
+		orange	={255,127,0},
+		yellow	={255,255,0},
+		green 	={0,255,0},
+		blue 	={0,0,255},
+		indigo 	={0,255,255},
+		purple 	={255,0,255},
+]]
+function create_popup(data)
+    local target = data.target
+    local value = math.floor(data.value)
+
+    local type = data.type or "miss"
+    local color = data.color or Vector(255, 255, 255)
+    local duration = data.duration or 1.0
+
+    local size = string.len(value)
+
+    local pre = data.pre or nil
+    if pre ~= nil then
+        size = size + 1
+    end
+
+    local pos = data.pos or nil
+    if pos ~= nil then
+        size = size + 1
+    end
+
+    local particle_path = "particles/msg_fx/msg_" .. type .. ".vpcf"
+    local particle = ParticleManager:CreateParticle(particle_path, PATTACH_OVERHEAD_FOLLOW, target)
+    ParticleManager:SetParticleControl(particle, 1, Vector(pre, value, pos))
+    ParticleManager:SetParticleControl(particle, 2, Vector(duration, size, 0))
+    ParticleManager:SetParticleControl(particle, 3, color)
+	ParticleManager:ReleaseParticleIndex(particle)
+end
+
+function create_popup_by_damage_type(data, ability)
+    local damage_type = ability:GetAbilityDamageType()
+    if damage_type == DAMAGE_TYPE_PHYSICAL then
+        data.color = Vector(174, 47, 40)
+    elseif damage_type == DAMAGE_TYPE_MAGICAL then
+        data.color = Vector(91, 147, 209)
+    elseif damage_type == DAMAGE_TYPE_PURE then
+        data.color = Vector(216, 174, 83)
+    else
+        data.color = Vector(255, 255, 255)
+    end
+    create_popup(data)
+end
+

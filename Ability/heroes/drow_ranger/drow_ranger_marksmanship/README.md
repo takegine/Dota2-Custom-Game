@@ -2,9 +2,9 @@
 
 ![](game/resource/flash3/images/spellicons/mjz_drow_ranger_marksmanship.png)
 
-卓尔游侠的战斗经验使她有概率发出极其精准高效的箭矢。箭矢将造成基于她攻击力的额外伤害。
+卓尔游侠的战斗经验使她有概率发出极其精准高效的箭矢。箭矢将造成基于她攻击力的额外伤害。可用神杖升级。
 
-Drow's experiences in battle grant her a chance to launch arrows with incredible accuracy and effectiveness. Dealing additional damage based on her Attack Damage.
+Drow's experiences in battle grant her a chance to launch arrows with incredible accuracy and effectiveness. Dealing additional damage based on her Attack Damage.Upgradable by Aghanim's Scepter.
 
 **1X触发几率**：15%/22%/30%
 
@@ -23,6 +23,14 @@ Drow's experiences in battle grant her a chance to launch arrows with incredible
 **伤害类型**：纯粹
 
 **无视魔法免疫**：是
+
+**可用神杖升级**：是
+
+
+
+
+
+
 
 
 

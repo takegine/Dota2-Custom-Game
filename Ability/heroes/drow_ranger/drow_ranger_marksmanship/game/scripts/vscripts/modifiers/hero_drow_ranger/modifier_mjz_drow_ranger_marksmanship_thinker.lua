@@ -10,11 +10,12 @@ function modifier_class:IsPurgable() return false end
 
 function modifier_class:DeclareFunctions()
 	local func = {
+		MODIFIER_EVENT_ON_ATTACK,
         -- MODIFIER_EVENT_ON_ATTACK_START,
-		-- MODIFIER_EVENT_ON_ATTACK,
 		-- MODIFIER_EVENT_ON_ATTACK_FAIL,
-		MODIFIER_EVENT_ON_ATTACK_LANDED,
-        -- MODIFIER_EVENT_ON_ORDER
+		-- MODIFIER_EVENT_ON_ATTACK_LANDED,
+		-- MODIFIER_EVENT_ON_ORDER,
+		-- MODIFIER_PROPERTY_PROJECTILE_NAME,
     }
 	return func
 end
@@ -25,112 +26,78 @@ function modifier_class:OnCreated()
 	self.parent = self:GetParent()
 end
 
-function modifier_class:OnAttackStart(keys)
-    if IsServer() then
-        if keys.attacker ~= self:GetParent() then return nil end
-        if keys.attacker:IsIllusion() then return nil end
-        if self:GetParent():PassivesDisabled()  then return nil end
-
-        local attacker = keys.attacker
-		local target = keys.target
-
-        --[[
-            local chance = self.ability:GetSpecialValueFor("chance")
-
-            local marksmanship_attack = RollPercentage(chance)
-
-            if target:IsBuilding() or target:IsMagicImmune() then
-                marksmanship_attack = false
-            end
-
-            if marksmanship_attack then
-                --mark that attack as a frost arrow
-                self.frost_arrow_attack = false
-                self.marksmanship_attack = true
-            else
-                -- Transform back to usual projectiles
-                self.frost_arrow_attack = false
-                self.marksmanship_attack = false
-            end
-            SetArrowAttackProjectile(self.caster, self.frost_arrow_attack,  self.marksmanship_attack)
-        ]]
-
-	end
-end
-
 function modifier_class:OnAttack(keys)
-    if IsServer() then
+	if IsServer() then
+		-- print('OnAttack')				
         if keys.attacker ~= self:GetParent() then return nil end
+		if self:GetParent():PassivesDisabled()  then return nil end
+		if TargetIsFriendly(self:GetParent(), keys.target) then return nil end
+		
+        -- if keys.attacker:IsIllusion() then return nil end
 
 		local attacker = keys.attacker
 		local target = keys.target
-       
+        local ability = self:GetAbility()
+		
+		local marksmanship_attack = ability:_FirtAbilityEffect(attacker, target)		
+		-- self:SetStackCount(marksmanship_attack)
+	end
+end
+
+
+function modifier_class:OnAttackStart(keys)
+	if IsServer() then
+		-- print('OnAttackStart')		
+        if keys.attacker ~= self:GetParent() then return nil end
+        -- if keys.attacker:IsIllusion() then return nil end
+        if self:GetParent():PassivesDisabled()  then return nil end
+		if TargetIsFriendly(self:GetParent(), keys.target) then return nil end
+
+        local attacker = keys.attacker
+		local target = keys.target
+        local ability = self:GetAbility()
+
 	end
 end
 
 function modifier_class:OnAttackLanded(keys)
-    if IsServer() then
+	if IsServer() then
+		-- print('OnAttackLanded')
         if keys.attacker ~= self:GetParent() then return nil end
 		if keys.attacker:IsIllusion() then return nil end
 		if keys.target:IsBuilding() then return nil end
-		if self:GetParent():PassivesDisabled()  then return nil end
 		if TargetIsFriendly(self:GetParent(), keys.target) then return nil end
 		
-
-        local ability = self:GetAbility()
 		local attacker = keys.attacker
 		local target = keys.target
-        
-        local attack_damage = self:GetParent():GetAverageTrueAttackDamage(target)
-        local chance_1x = ability:GetSpecialValueFor("chance_1x")
-        local chance_2x = ability:GetSpecialValueFor("chance_2x")
-        local chance_3x = ability:GetSpecialValueFor("chance_3x")
-
-        local damage = 0
-        if RollPercentage(chance_3x) then
-            damage = attack_damage * 3
-        elseif RollPercentage(chance_2x) then
-            damage = attack_damage * 2
-        elseif RollPercentage(chance_1x) then
-            damage = attack_damage * 1
-        end
-
-        if damage > 0 then
-            local damage_table = {
-                attacker = attacker,
-                victim = target,
-                ability = ability,
-                damage = damage,
-                damage_type = ability:GetAbilityDamageType(),
-            }
-            ApplyDamage(damage_table)
-
-            create_popup_by_damage_type({
-                target = target,
-                value = damage,
-                color = nil,
-                type = "damage"
-            }, ability) 
-        end
+        local ability = self:GetAbility()	
 	end
 end
 
 function modifier_class:OnAttackFail(keys)
     if IsServer() then
         if keys.attacker ~= self:GetParent() then return nil end
-
+		if keys.attacker:IsIllusion() then return nil end
+		if keys.target:IsBuilding() then return nil end
+		if TargetIsFriendly(self:GetParent(), keys.target) then return nil end
+		
 		local attacker = keys.attacker
         local target = keys.target
-
     end
 end
 
 function modifier_class:OnOrder(keys)
 	if keys.unit == self.caster then
 		local order_type = keys.order_type
-
 		if order_type ~= DOTA_UNIT_ORDER_ATTACK_TARGET then
+			-- print('OnOrder')	
 		end
+	end
+end
+
+function modifier_class:GetModifierProjectileName()
+	if self:GetStackCount() > 0 then
+		return "particles/units/heroes/hero_drow/drow_marksmanship_attack.vpcf"
 	end
 end
 
