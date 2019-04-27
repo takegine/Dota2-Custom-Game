@@ -1,71 +1,140 @@
 
-function on_spell_start( keys )
-	if IsServer() then	
-		-- local caster = EntIndexToHScript(keys.caster_entindex)   --物品携带者
-		local caster = keys.caster
-		local ability = keys.ability
-		local ability_level = ability:GetLevel() - 1
+LinkLuaModifier("modifier_black_king_bar_faster", "items/item_black_king_bar_faster.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_black_king_bar_faster_ability", "items/item_black_king_bar_faster.lua", LUA_MODIFIER_MOTION_NONE)
 
-		local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
-		-- scaleModel(caster, keys.PercentageOverModelScale, duration)
-		caster:AddNewModifier(caster, ability, "modifier_black_king_bar_faster", {Duration = duration})
+------------------------------------------------------------------------
 
-		updateLevel(keys)
+item_black_king_bar_faster = class({})
+
+function item_black_king_bar_faster:GetIntrinsicModifierName()
+	if IsServer() then
+		self:OnEquip()
+	end
+	return 'modifier_black_king_bar_faster'
+end
+
+if IsServer() then
+	function item_black_king_bar_faster:OnEquip()
+		local caster = self:GetCaster()
+		local ability = self
+		local duration = ability:GetSpecialValueFor("duration")
+		local max_level = ability:GetSpecialValueFor("max_level")
+	
+		RefreshLevel(caster, ability, max_level)
+	end
+
+	function item_black_king_bar_faster:OnSpellStart()
+		local caster = self:GetCaster()
+		local ability = self
+		local duration = ability:GetSpecialValueFor("duration")
+		local max_level = ability:GetSpecialValueFor("max_level")
+
+		caster:AddNewModifier(caster, ability, "modifier_black_king_bar_faster_ability", {Duration = duration})
+
+		UpdateLevel(caster, ability, max_level)
 
 		caster:Purge(false, true, false, true, false)
+
+		EmitSoundOn("DOTA_Item.BlackKingBar.Activate", caster)
 	end
 end
 
-function updateLevel( keys )
-	local current_level = keys.ability:GetLevel()
-	if current_level + 1 <= keys.MaxLevel then
-		keys.ability:SetLevel(current_level + 1)
-		keys.caster.BKBLevel = current_level + 1  --BKB's level is tied to the player, not the item, so store it here.
+
+function UpdateLevel(caster, ability, max_level)
+	local item_name = ability:GetName()
+	local current_level = caster.BKBLevel or ability:GetLevel()
+
+	if current_level + 1 <= max_level then
+		ability:SetLevel(current_level + 1)
+		caster.BKBLevel = current_level + 1  --BKB's level is tied to the player, not the item, so store it here.
 		
-		for i=0, 11, 1 do  --Level up any other BKBs in the player's inventory or stash to match the new level.
-			local current_item = keys.caster:GetItemInSlot(i)
-			if current_item ~= nil then
-				if current_item:GetName() == keys.ItemName and current_item:GetLevel() ~= keys.caster.BKBLevel then
-					current_item:SetLevel(keys.caster.BKBLevel)
-				end
+		RefreshLevel(caster, ability, max_level)
+	end
+end
+
+function RefreshLevel(caster, ability, max_level)
+	local item_name = ability:GetName()
+    local bkb_level = caster.BKBLevel or ability:GetLevel()
+		
+	for i=0, 11, 1 do  --Level up any other BKBs in the player's inventory or stash to match the new level.
+		local current_item = caster:GetItemInSlot(i)
+		if current_item ~= nil then
+            if current_item:GetName() == item_name and current_item:GetLevel() ~= bkb_level then
+				current_item:SetLevel(bkb_level)
 			end
 		end
 	end
 end
 
-
 ------------------------------------------------------------------------
 
-LinkLuaModifier("modifier_black_king_bar_faster", "items/item_black_king_bar_faster.lua", LUA_MODIFIER_MOTION_NONE)
 
 modifier_black_king_bar_faster = class({})
 
-function modifier_black_king_bar_faster:IsHidden()
-	return true
+function modifier_black_king_bar_faster:IsHidden() return true end
+function modifier_black_king_bar_faster:IsPurgable() return false end
+
+function modifier_black_king_bar_faster:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
+		MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE,
+	}
 end
 
-if IsServer() then
-	function modifier_black_king_bar_faster:OnCreated()
-		local parent = self:GetParent()
-
-		if not parent then
-			self:Destroy()
-		end
-
-		local ability = self:GetAbility()
-		self.model_scale = ability:GetSpecialValueFor("model_scale")
-	end
-
-	function modifier_black_king_bar_faster:DeclareFunctions()
-		return {
-			MODIFIER_PROPERTY_MODEL_SCALE,
-		}
-	end
-
-	function modifier_black_king_bar_faster:GetModifierModelScale()
-		return self.model_scale
-	end
+function modifier_black_king_bar_faster:GetModifierBonusStats_Strength()
+	return self:GetAbility():GetSpecialValueFor('bonus_strength')
 end
+
+function modifier_black_king_bar_faster:GetModifierPreAttack_BonusDamage()
+	return self:GetAbility():GetSpecialValueFor('bonus_damage')
+end
+
+
+------------------------------------------------------------------------
+
+
+modifier_black_king_bar_faster_ability = class({})
+
+function modifier_black_king_bar_faster_ability:IsHidden() return false end
+function modifier_black_king_bar_faster_ability:IsPurgable() return false end
+
+function modifier_black_king_bar_faster_ability:GetTexture()
+    -- return self:GetAbility():GetAbilityTextureName()
+    return 'item_black_king_bar_faster'
+end
+
+function modifier_black_king_bar_faster_ability:CheckState()
+	local state = {
+	  [MODIFIER_STATE_MAGIC_IMMUNE] = true,
+	}
+	return state
+end
+
+function modifier_black_king_bar_faster_ability:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MODEL_SCALE,
+	}
+end
+
+function modifier_black_king_bar_faster_ability:GetModifierModelScale()
+	return self:GetAbility():GetSpecialValueFor("model_scale")
+end
+
+function modifier_black_king_bar_faster_ability:GetEffectName()
+	return "particles/items_fx/black_king_bar_avatar.vpcf"
+end
+
+function modifier_black_king_bar_faster_ability:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
+
+function modifier_black_king_bar_faster_ability:GetStatusEffectName()
+	return "particles/status_fx/status_effect_avatar.vpcf"
+end
+function modifier_black_king_bar_faster_ability:StatusEffectPriority()
+	return 10
+end
+
 
 -----------------------------------------------------------------------
 

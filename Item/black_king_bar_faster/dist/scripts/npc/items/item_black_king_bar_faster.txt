@@ -19,16 +19,15 @@
 			"01"						"item_ogre_axe;item_ogre_axe;item_mithril_hammer"
 		}
 	}
-	"item_black_king_bar_faster"	
+	"item_black_king_bar_faster"
 	{
 		"ID"							"70116"
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_black_king_bar_faster.lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"2"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"		// 不可驱散
 		"AbilityTextureName"			"black_king_bar_faster"
-		"Model"							"models/props_gameplay/red_box.vmdl" 
-		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
 
 		"ItemCost"						"3600"
 		"ItemShopTags"					"str;damage;hard_to_tag"
@@ -47,7 +46,6 @@
 		"AbilityCastPoint"				"0"
 
 		"AbilityCooldown"				"15.0"
-
 		"AbilityManaCost"				"0"
 
 		"AbilityModifierSupportValue"	"0.25"	// mostly about the blink
@@ -88,89 +86,5 @@
 				"var_type"				"FIELD_INTEGER"
 				"model_scale"			"90 75 60 45 30"     // Percentage over model scale
 			}
-			
-		}
-	
-		"OnSpellStart"
-		{
-			"FireSound"
-			{
-				"EffectName"    	"DOTA_Item.BlackKingBar.Activate"			//"Hero_LifeStealer.Rage"
-				"Target"        	"CASTER"
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"    	"items/item_black_king_bar_faster.lua"
-				"Function"        	"on_spell_start"
-				"PercentageOverModelScale"	"%model_scale"
-				"Duration"			"%duration"
-				"MaxLevel"			"%max_level"
-				"ItemName"			"item_black_king_bar_faster"
-			}
-
-			"ApplyModifier"
-			{
-				"ModifierName" 		"modifier_black_king_bar_faster_ability"
-				"Target"        	"CASTER"
-				"Duration"      	"%duration"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_black_king_bar_faster"
-			{
-				"Passive"           "1"
-				"IsHidden"          "1"
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"	//可叠加
-	
-				"Properties"
-				{
-					// "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE"        "20"        //攻击百分比加成
-					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"        "%bonus_strength"        	//力量
-					// "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"      	"%bonus_intellect"        	//智力
-					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"		"%bonus_damage"				//攻击力
-					// "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_attack_speed"		//攻击速度
-				}
-			}
-
-			"modifier_black_king_bar_faster_ability"
-			{
-				"Passive"           "0"
-				"IsHidden"          "0"
-				"IsDebuff"          "0"
-
-				"StatusEffectName"				"particles/status_fx/status_effect_avatar.vpcf"
-				"StatusEffectPriority"  		"10"
-		
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"			"particles/items_fx/black_king_bar_avatar.vpcf"
-						"EffectAttachType"  	"attach_hitloc"
-						"Target"            	"CASTER"
-						"ControlPointEntities"
-						{
-							"CASTER"    "attach_hitloc"
-						}
-					}
-				}
-		
-				"Properties"
-				{
-					// "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_ITEM_UNIQUE" 	"100"	//100%魔法抗性
-					// "MODIFIER_PROPERTY_MODEL_SCALE"					"%model_scale"	// Unhandled - These properties aren't working
-				}
-
-				"States"
-				{
-					"MODIFIER_STATE_MAGIC_IMMUNE"        			"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
 		}
 	}
-
-
-	
