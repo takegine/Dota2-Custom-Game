@@ -1,0 +1,20 @@
+<root>
+	<!-- 英雄选择界面：显示顶部信息栏 -->
+	<script>
+		function findSetVisibility(root, find, newValue) {
+			root.FindChildTraverse(find).style.visibility = newValue;
+		}
+		var parent = $.GetContextPanel().GetParent().GetParent()
+		
+		findSetVisibility(parent, "HeroPickMinimap", "collapse")
+		findSetVisibility(parent, "GridTeamComp", "collapse")
+
+		var preGame = parent.FindChildTraverse("PreGame")
+
+		findSetVisibility(preGame, "Header", "visible")
+	</script>
+
+	<Panel>
+		<CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/sidebar_left.xml" />
+	</Panel>
+</root>

@@ -1,0 +1,26 @@
+<root>
+    <styles>
+		<include src="file://{resources}/styles/dotastyles.css" />
+		<include src="file://{resources}/styles/custom_game/sidebar_left.css" />
+	</styles>
+	<Panel class="GameInfo" >
+		<Panel id="Title">
+			<Label id="TitleName" text="#addon_game_name" />
+		</Panel> 
+
+		<Label id="H1" class="Header" html="true" text="Greevil" /> 
+		<Panel id="Info1" class="InfoStringDown" >
+           <TextEntry id="MyEntry" maxchars="100000" rows="3" cols="20"
+            placeholder="Type here..." oninputsubmit="OnSubmitted()" />	
+            <Button id="ShuffleTeamAssignmentButton" onactivate="OnShufflePlayersPressed()">
+                <Label text="Button" />
+            </Button>	
+		</Panel> 
+
+		<Label id="H2" class="Header" html="true" text="Zombie" />
+		<Panel id="Info2" class="InfoStringDown" >
+						
+		</Panel> 
+
+	</Panel>		
+</root>
