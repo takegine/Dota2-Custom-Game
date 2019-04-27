@@ -29,7 +29,8 @@ end
 function modifier_class:OnAttack(keys)
 	if IsServer() then
 		-- print('OnAttack')				
-        if keys.attacker ~= self:GetParent() then return nil end
+		if keys.attacker ~= self:GetParent() then return nil end
+		if keys.target:IsBuilding() then return nil end		
 		if self:GetParent():PassivesDisabled()  then return nil end
 		if TargetIsFriendly(self:GetParent(), keys.target) then return nil end
 		
