@@ -94,9 +94,9 @@ function modifier_mjz_centaur_return_aura:GetAuraSearchTeam()
     return DOTA_UNIT_TARGET_TEAM_FRIENDLY
 end
 
--- function modifier_mjz_centaur_return_aura:GetAuraEntityReject(target)
---     return target:IsWard() 
--- end
+function modifier_mjz_centaur_return_aura:GetAuraEntityReject(target)
+    return self:GetParent():IsIllusion()
+end
 
 function modifier_mjz_centaur_return_aura:GetAuraSearchType()
 	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
