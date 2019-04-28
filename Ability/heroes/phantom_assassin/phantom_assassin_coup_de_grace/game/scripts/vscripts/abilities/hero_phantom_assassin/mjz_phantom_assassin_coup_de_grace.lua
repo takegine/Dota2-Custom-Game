@@ -1,76 +1,150 @@
 
-local modifier_crit = 'modifier_mjz_phantom_assassin_coup_de_grace_crit'
+local THIS_LUA = "abilities/hero_phantom_assassin/mjz_phantom_assassin_coup_de_grace.lua"
+local MODIFIER_INIT_NAME = 'modifier_mjz_phantom_assassin_coup_de_grace'
+local MODIFIER_BONUS_NAME = 'modifier_mjz_phantom_assassin_coup_de_grace_bonus'
 
-function OnOrbFire(event)
-	-- print('OnOrbFire')
-	local caster = event.caster
-	local ability = event.ability
+LinkLuaModifier(MODIFIER_INIT_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_BONUS_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
 
-	if IsCrit(event) then
-		PlayEffect(event)
-	end
+--------------------------------------------------------------------------------------
 
-	caster:RemoveModifierByName(modifier_crit)
+mjz_phantom_assassin_coup_de_grace = class({})
 
-	OnRandomStart(event)
+function mjz_phantom_assassin_coup_de_grace:GetIntrinsicModifierName()
+	return 'modifier_mjz_phantom_assassin_coup_de_grace'
 end
 
-function OnOrbImpact(event)
-	-- print('OnOrbImpact')
-	local caster = event.caster
-	local ability = event.ability
-end
+--------------------------------------------------------------------------------------
 
-function OnAttackStart( event )
-	-- print('OnAttackStart')
-end
+modifier_mjz_phantom_assassin_coup_de_grace = class({})
+local modifier_class = modifier_mjz_phantom_assassin_coup_de_grace
 
-function OnAttackLanded( event )
-	-- print('OnAttackLanded')
-end
+function modifier_class:IsPassive() return true end
+function modifier_class:IsHidden() return true end
+function modifier_class:IsPurgable() return false end
 
-function IsCrit( event )
-	local caster = event.caster
-	local ability = event.ability
-	return caster:HasModifier(modifier_crit) 
-end
-
-function OnRandomStart( event )
-	local caster = event.caster
-	local ability = event.ability
-	local target = event.target
-
-	local crit_chance = GetTalentSpecialValueFor(ability, 'crit_chance')
-
-	-- "PseudoRandom"	"DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"
-	local random_value = RandomInt(1, 100)
-    if random_value <= crit_chance  then
-        OnRandomSuccess(event)
+if IsServer() then
+    function modifier_class:DeclareFunctions()
+        local func = {
+			MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE,
+			MODIFIER_EVENT_ON_ATTACK,
+			MODIFIER_EVENT_ON_ATTACK_LANDED,
+        }
+        return func
     end
-end
 
-function OnRandomSuccess( event )
-	-- print('OnRandomSuccess')
-	local caster = event.caster
-	local ability = event.ability
-	local attacker = event.attacker
-	local target = event.target
-
-	local c1 = ( target:IsBuilding() == false ) and ( target:IsOther() == false ) 
-	local c2 = ( attacker:GetTeamNumber() ~= target:GetTeamNumber() )
-	if c1 and c2 then
-		ability:ApplyDataDrivenModifier(caster, caster, modifier_crit, {duration=-1})
+	function modifier_class:GetModifierPreAttack_CriticalStrike(event)
+		local target = event.target 
+		local attacker = event.attacker
+		local ability = self:GetAbility()
+		if ability.crit then
+			local crit_bonus = GetTalentSpecialValueFor(ability, "crit_bonus")
+			return crit_bonus
+		end
 	end
+
+	function modifier_class:OnAttack( event )
+		if event.attacker ~= self:GetParent() then return end
+		local target = event.target 
+		local attacker = event.attacker
+        local caster = self:GetCaster()
+		local ability = self:GetAbility()
+
+		if ability.crit then
+			ability.crit = false
+
+			if not attacker:IsRangedAttacker() then
+				ability.cleave = true
+			end	
+
+			if attacker:HasScepter() then
+				ability.magical = true
+			end
+
+			PlayEffect(attacker, target)
+
+			local bonus_duration = ability:GetSpecialValueFor('bonus_duration')
+			attacker:AddNewModifier(caster, ability, MODIFIER_BONUS_NAME, {duration = bonus_duration})
+		end
+
+		local can = self:_CheckAttack(attacker, target, ability)
+		if can then
+			local crit_chance = GetTalentSpecialValueFor(ability, "crit_chance")
+			local crit_bonus = GetTalentSpecialValueFor(ability, "crit_bonus")
+			if RollPercentage(crit_chance) then
+				ability.crit = true
+			end
+		end
+	end
+
+	function modifier_class:OnAttackLanded(event)
+        local caster = self:GetCaster()
+        local parent = self:GetParent()
+        local ability = self:GetAbility()
+        local target = event.target
+		local attacker = event.attacker
+		local attack_damage = event.original_damage
+
+		if attacker:IsIllusion() then return nil end
+
+		local can = self:_CheckAttack(attacker, target, ability)
+		if can then
+			if ability.magical then
+				ability.magical = false
+				self:_MagicalAttack(target, attack_damage)
+			end
+
+			if ability.cleave then
+				ability.cleave = false
+				local vToCaster = attacker:GetAbsOrigin() - target:GetAbsOrigin()
+				local flDistance = vToCaster:Length2D()
+				local attack_range = attacker:GetBaseAttackRange() + 50
+				if flDistance <= attack_range then
+					_DoCleaveAttack(attacker, ability, target, attack_damage)
+				end
+			end
+		end
+	end
+		
+	function modifier_class:_CheckAttack(attacker, target, ability )
+		if attacker ~= self:GetParent() then return nil end
+		if attacker:PassivesDisabled() then return nil end
+
+		local nResult = UnitFilter(
+			target,
+			ability:GetAbilityTargetTeam(),
+			ability:GetAbilityTargetType(),
+			ability:GetAbilityTargetFlags(),
+			attacker:GetTeamNumber()
+		)
+		return nResult == UF_SUCCESS
+	end
+
+	function modifier_class:_MagicalAttack(target, attack_damage)
+		if target:IsMagicImmune() then return nil end
+
+		local caster = self:GetCaster()
+        local parent = self:GetParent()
+		local ability = self:GetAbility()
+		local magical_damage = ability:GetSpecialValueFor('magical_damage_scepter')
+		local damage = attack_damage * (magical_damage / 100.0)
+		
+		local damageTable = {
+			victim = target,
+			damage = damage,
+			damage_type = DAMAGE_TYPE_MAGICAL,
+			attacker = caster,
+			ability = ability
+		}
+		ApplyDamage(damageTable)
+		SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage, nil)
+	end
+
 end
 
-function PlayEffect( event )
-	if not IsServer() then return nil end
-
-	local caster = event.caster
-	local target = event.target
-	local ability = event.ability
-
-	target:EmitSound('Hero_PhantomAssassin.CoupDeGrace')
+function PlayEffect( caster, target)
+	
+	EmitSoundOn('Hero_PhantomAssassin.CoupDeGrace', target)
 
 	local effect_name = GetEffectName(caster, target)
 
@@ -102,9 +176,47 @@ function GetEffectName( caster, target )
 	return effect_self.crit_impact
 end
 
+function _DoCleaveAttack(caster, ability, target, attack_damage)
+	local cleave_percent = GetTalentSpecialValueFor(ability, "cleave_damage")
+	local cleave_start_radius = GetTalentSpecialValueFor(ability, "cleave_starting_width")
+	local cleave_end_radius = GetTalentSpecialValueFor(ability, "cleave_ending_width")
+	local cleave_distance = GetTalentSpecialValueFor(ability, "cleave_distance")
+
+	local cleaveDamage = attack_damage * (cleave_percent / 100.0)
+
+	local cleave_effect_kunkka = "particles/units/heroes/hero_kunkka/kunkka_spell_tidebringer.vpcf"
+	local cleave_effect_kunkka_fxset = "particles/econ/items/kunkka/divine_anchor/hero_kunkka_dafx_weapon/kunkka_spell_tidebringer_fxset.vpcf"
+	local cleave_effect_sven = "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+	local cleave_effect_sven_ti7_crit  = "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave_crit.vpcf"
+	local cleave_effect_sven_ti7_gods_crit = "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave_gods_strength_crit.vpcf"
+
+	local cleave_effectName = cleave_effect_sven_ti7_gods_crit
+
+	DoCleaveAttack(caster, target, ability, cleaveDamage, cleave_start_radius, cleave_end_radius, cleave_distance, cleave_effectName)
+end
+
+--------------------------------------------------------------------------------------
 
 
+modifier_mjz_phantom_assassin_coup_de_grace_bonus = class({})
+local modifier_bonus = modifier_mjz_phantom_assassin_coup_de_grace_bonus
 
+function modifier_bonus:IsHidden() return false end
+function modifier_bonus:IsPurgable() return false end
+
+function modifier_bonus:DeclareFunctions()
+	local func = {
+		MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
+	}
+	return func
+end
+
+function modifier_bonus:GetModifierAttackSpeedBonus_Constant(event)
+	return self:GetAbility():GetSpecialValueFor('bonus_attack_speed')
+end
+
+
+--------------------------------------------------------------------------------------
 
 -- 获得天赋技能的数据值
 function FindTalentValue(unit, talentName)
