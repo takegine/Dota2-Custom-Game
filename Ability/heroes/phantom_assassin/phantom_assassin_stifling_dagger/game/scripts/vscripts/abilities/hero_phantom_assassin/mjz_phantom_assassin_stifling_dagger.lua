@@ -1,18 +1,35 @@
 LinkLuaModifier("modifier_mjz_stifling_dagger_slow", "modifiers/hero_phantom_assassin/modifier_mjz_phantom_assassin_stifling_dagger.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_mjz_stifling_dagger_attack", "modifiers/hero_phantom_assassin/modifier_mjz_phantom_assassin_stifling_dagger.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_mjz_stifling_dagger_attack_factor", "modifiers/hero_phantom_assassin/modifier_mjz_phantom_assassin_stifling_dagger.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_mjz_stifling_dagger_attack_bonus", "modifiers/hero_phantom_assassin/modifier_mjz_phantom_assassin_stifling_dagger.lua", LUA_MODIFIER_MOTION_NONE)
 
 
-function OnSpellStart( keys )
-	local caster = keys.caster
-	local ability = keys.ability
-	local target = keys.target
+--------------------------------------------------------------------------------------
+
+mjz_phantom_assassin_stifling_dagger = class({})
+
+function mjz_phantom_assassin_stifling_dagger:GetAOERadius()
+	return self:GetSpecialValueFor('search_radius')
+end
+
+function mjz_phantom_assassin_stifling_dagger:GetCastRange(vLocation, hTarget)
+	return self:GetSpecialValueFor('cast_range')
+end
+
+
+function mjz_phantom_assassin_stifling_dagger:OnSpellStart( )
+	if not IsServer() then return nil end
+	local caster = self:GetCaster()
+	local ability = self
+	local target = self:GetCursorTarget()
+
+	local search_radius = GetTalentSpecialValueFor(ability, "search_radius")
 	local target_count =  GetTalentSpecialValueFor(ability, "target_count")
-	local effect_name = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"
 	local dagger_speed = ability:GetSpecialValueFor('dagger_speed')
 
+	local effect_name = "particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"
 	local projectile_info = 
 	{
-		Target = unit,
+		Target = target,
 		Source = caster,
 		Ability = ability,	
 		EffectName = effect_name,
@@ -29,45 +46,45 @@ function OnSpellStart( keys )
 		iVisionTeamNumber = caster:GetTeamNumber(),        -- Optional
 		iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1
 	}
-
+	ProjectileManager:CreateTrackingProjectile(projectile_info)
 	caster:EmitSound("Hero_PhantomAssassin.Dagger.Cast")
 
-	local count = 0
-	local units = GetTargets(caster, ability, target)
+	local count = 1
+	local units = GetTargets(caster, ability, target, search_radius)
 	for _,unit in pairs(units) do
-		if count < target_count then
+		if count < target_count and unit ~= target then
 			count = count + 1
-
 			projectile_info.Target = unit
 			ProjectileManager:CreateTrackingProjectile(projectile_info)
 		end
 	end
-
 end
 
-function OnProjectileHitUnit( keys )
+function mjz_phantom_assassin_stifling_dagger:OnProjectileHit(target, location)
+	if not IsServer() then return nil end
+	local caster = self:GetCaster()
+	local ability = self
 
-	local caster = keys.caster
-	local ability = keys.ability
-	local target = keys.target
 	local base_damage = GetTalentSpecialValueFor(ability, "base_damage")
-	local slow_duration = GetTalentSpecialValueFor(ability, 'duration')
-	local modifier_slow = 'modifier_mjz_stifling_dagger_slow'
-	local modifier_attack = 'modifier_mjz_stifling_dagger_attack'
+	local slow_duration = GetTalentSpecialValueFor(ability, 'slow_duration')
+	local MODIFIER_SLOW = 'modifier_mjz_stifling_dagger_slow'
+	local MODIFIER_ATTACK_FACTOR = 'modifier_mjz_stifling_dagger_attack_factor'
+	local MODIFIER_ATTACK_BONUS = 'modifier_mjz_stifling_dagger_attack_bonus'
 
-	if target:GetTeam() ~= caster:GetTeam() and target:TriggerSpellAbsorb(ability) then
-		return
-	end
+	if target:TriggerSpellAbsorb(ability) then return nil end
 
-	ApplyDamage({
-		victim = target, 
-		attacker = caster, 
-		ability = ability, 
-		damage = base_damage, 
-		damage_type = ability:GetAbilityDamageType()
-	})
+	--[[
+		ApplyDamage({
+			victim = target, 
+			attacker = caster, 
+			ability = ability, 
+			damage = base_damage, 
+			damage_type = ability:GetAbilityDamageType()
+		})
+	]]
 
-	caster:AddNewModifier(caster, ability, modifier_attack, {duration = 0.1})
+	caster:AddNewModifier(caster, ability, MODIFIER_ATTACK_FACTOR, {duration = 0.03})
+	caster:AddNewModifier(caster, ability, MODIFIER_ATTACK_BONUS, {duration = 0.03})
 	-- caster:AttackReady()
 	-- print('PerformAttack ....')
 	caster:PerformAttack (
@@ -81,16 +98,23 @@ function OnProjectileHitUnit( keys )
         true        -- bool bNeverMiss  可敌先机
 	)
 	-- print('PerformAttack done.')
-	caster:RemoveModifierByName(modifier_attack)
+	caster:RemoveModifierByName(MODIFIER_ATTACK_BONUS)
+	caster:RemoveModifierByName(MODIFIER_ATTACK_FACTOR)
 
-	target:AddNewModifier(caster, ability, modifier_slow, {duration = slow_duration})
+	target:AddNewModifier(caster, ability, MODIFIER_SLOW, {duration = slow_duration})
 end
 
-function GetTargets( caster, ability, target )
-	local radius = GetTalentSpecialValueFor(ability, "radius")
-	return FindUnitsInRadius(caster:GetTeam(), target:GetAbsOrigin(), nil, 
-		radius, ability:GetAbilityTargetTeam(), ability:GetAbilityTargetType(), 
-		ability:GetAbilityTargetFlags(), FIND_ANY_ORDER, false)
+----------------------------------------------------------------------------------------------
+
+function GetTargets( caster, ability, target, radius )
+	return FindUnitsInRadius(
+		caster:GetTeam(),
+		target:GetAbsOrigin(),
+		nil, radius, 
+		ability:GetAbilityTargetTeam(), 
+		ability:GetAbilityTargetType(), 
+		ability:GetAbilityTargetFlags(), 
+		FIND_ANY_ORDER, false)
 end
 
 
