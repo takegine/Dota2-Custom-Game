@@ -82,7 +82,7 @@ function MainGame:InitGameMode()
 	-- 幻象死亡时立即消失，而不是延迟数秒
 	GameRules:GetGameModeEntity():SetRemoveIllusionsOnDeath( true )
 	-- 设置初始金钱
-	-- GameRules:GetGameModeEntity():SetStartingGold(600)	
+	-- GameRules:SetStartingGold(600)	
 	-- 禁用死亡时损失金钱
 	GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 	-- 允许/禁止英雄买活
