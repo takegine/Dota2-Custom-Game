@@ -70,7 +70,7 @@ function MainGame:OnHeroInGameFirstTime( hero )
 
     if not hero.next_spawn then
         hero.next_spawn = true;
-
+		HeroAbilitySetBaseLevel(hero)
     end
 end
 
@@ -263,4 +263,32 @@ function MainGame:OnRuneActivated (keys)
 	DOTA_RUNE_SPOOKY
 	DOTA_RUNE_TURBO
 	]]
+end
+
+----------------------------------------------------------------------------------
+
+--[[
+	当英雄出生时，设置他的技能的基础等级。相当于默认技能
+	技能需要定义 BaseLevel 键，值为基础等级
+]]
+function HeroAbilitySetBaseLevel( hero )
+	local ability_count = hero:GetAbilityCount()
+	for i=0, (ability_count - 1) do
+		local ability = hero:GetAbilityByIndex(i)
+		if ability ~= nil then
+			local ability_max_level = ability:GetMaxLevel()
+			local ability_kv = ability:GetAbilityKeyValues()
+			for k,v in pairs(ability_kv) do 
+				if k == "BaseLevel" then
+					local base_level = tonumber(v) or 0
+					if base_level > 0 and base_level <= ability_max_level then
+						if ability:GetLevel() < base_level then
+							ability:SetLevel(base_level)
+						end
+					end
+					break
+				end
+			end
+		end
+	end
 end
