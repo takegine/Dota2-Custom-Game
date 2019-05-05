@@ -102,8 +102,8 @@ if IsServer() then
 		local ability = self:GetAbility()
 
 		local rocket_damage = GetTalentSpecialValueFor(ability, 'rocket_damage')
-		local int_damage_pct = GetTalentSpecialValueFor(ability, 'int_damage_pct')
-		local damage = rocket_damage + parent:GetIntellect() * (int_damage_pct / 100.0)
+		local agi_damage_pct = GetTalentSpecialValueFor(ability, 'agi_damage_pct')
+		local damage = rocket_damage + parent:GetAgility() * (agi_damage_pct / 100.0)
 
 		ApplyDamage({
 			attacker = parent,
