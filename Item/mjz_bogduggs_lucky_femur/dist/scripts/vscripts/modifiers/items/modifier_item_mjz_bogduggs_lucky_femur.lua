@@ -34,23 +34,33 @@ function modifier_item_mjz_bogduggs_lucky_femur:OnAbilityFullyCast( params )
 		if use_unit ~= self:GetParent() then return 0 end
 		if use_ability == nil then return 0 end
 		if use_ability:IsItem() then return 0 end
+		if not use_ability:IsRefreshable() then return 0 end
+		if use_ability:GetCooldownTimeRemaining() == 0 then return 0 end
 
 		local refresh_pct = self:GetAbility():GetSpecialValueFor( "refresh_pct" )
-		if use_ability:IsRefreshable() and RollPercentage( refresh_pct ) then
-			use_ability:EndCooldown()
-
-			local p_name = "particles/units/heroes/hero_ogre_magi/ogre_magi_multicast.vpcf"
-			local nFXIndex = ParticleManager:CreateParticle( p_name, PATTACH_OVERHEAD_FOLLOW, self:GetParent() )
-			ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 1, 2, 1 ) )
-			ParticleManager:ReleaseParticleIndex( nFXIndex )
-
-			EmitSoundOn( "Hero_OgreMagi.Fireblast.x1", self:GetParent() )
+		if RollPercentage( refresh_pct ) then
+			self.use_ability = use_ability
+			self:StartIntervalThink(0.25)
 		end
 	end
 	return 0
 end
 
 
+if IsServer() then
+	function modifier_item_mjz_bogduggs_lucky_femur:OnIntervalThink()
+		local use_ability = self.use_ability
+		use_ability:EndCooldown()
 
+		local p_name = "particles/units/heroes/hero_ogre_magi/ogre_magi_multicast.vpcf"
+		local nFXIndex = ParticleManager:CreateParticle( p_name, PATTACH_OVERHEAD_FOLLOW, self:GetParent() )
+		ParticleManager:SetParticleControl( nFXIndex, 1, Vector( 1, 2, 1 ) )
+		ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+		EmitSoundOn( "Hero_OgreMagi.Fireblast.x1", self:GetParent() )
+
+		self:StartIntervalThink(-1)
+	end
+end
 
 
