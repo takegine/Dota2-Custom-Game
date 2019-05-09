@@ -1,0 +1,57 @@
+
+	//=================================================================================================================
+	//	Shredder: Reactive Armor
+	//=================================================================================================================
+	"mjz_shredder_reactive_armor"
+	{
+		"BaseClass"						"ability_lua"	// "ability_datadriven"
+		"ScriptFile"					"abilities/hero_shredder/mjz_shredder_reactive_armor.lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"mjz_shredder_reactive_armor"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+        "AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"bonus_armor"						"1 1.1 1.2 1.3"
+			}
+            "02"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"bonus_magic_resist"				"1 1.1 1.2 1.3"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"bonus_hp_regen"					"1 1.1 1.2 1.3"
+			}
+			"04"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"stack_limit"						"6 12 18 24"
+				"LinkedSpecialBonus"				"special_bonus_unique_mjz_shredder_reactive_armor_limit"  //"special_bonus_unique_timbersaw_2"
+			}
+			"05"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"stack_duration"					"10 15 20 25"
+			}
+		}
+	}
+    "special_bonus_unique_mjz_shredder_reactive_armor_limit"
+	{
+		"BaseClass"						"special_bonus_undefined"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"6"
+			}
+		}
+	}
