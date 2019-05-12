@@ -1,0 +1,11 @@
+
+	//=================================================================================================================
+	"npc_dota_hero_elder_titan"			//  上古巨神
+	//=================================================================================================================
+	{
+		"override_hero"			"npc_dota_hero_elder_titan"
+
+		"Ability6"				"mjz_elder_titan_earth_splitter"
+		"Ability16"				"special_bonus_unique_mjz_elder_titan_earth_splitter_strength"
+	}
+	
