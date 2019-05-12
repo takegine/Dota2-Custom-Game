@@ -1,0 +1,13 @@
+
+	//=================================================================================================================
+	"npc_dota_hero_doom_bringer"			//  末日
+	//=================================================================================================================
+	{
+		"override_hero"			"npc_dota_hero_doom_bringer"
+
+		"Ability1"				"mjz_doom_bringer_devour"
+		"Ability6"				"mjz_doom_bringer_doom"
+		"Ability13"		"special_bonus_unique_mjz_doom_bringer_devour_strength"
+		"Ability14"		"special_bonus_unique_mjz_doom_bringer_doom_damage"
+	}
+	
