@@ -122,10 +122,7 @@ function modifier_mjz_shredder_reactive_armor_physical:IsHidden() return true en
 function modifier_mjz_shredder_reactive_armor_physical:IsPurgable() return false end
 
 function modifier_mjz_shredder_reactive_armor_physical:GetAttributes()
-	local attributes = {
-		MODIFIER_ATTRIBUTE_MULTIPLE
-	}
-	return attributes
+	return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_mjz_shredder_reactive_armor_physical:DeclareFunctions()
@@ -148,10 +145,7 @@ function modifier_mjz_shredder_reactive_armor_magic:IsHidden() return true end
 function modifier_mjz_shredder_reactive_armor_magic:IsPurgable() return false end
 
 function modifier_mjz_shredder_reactive_armor_magic:GetAttributes()
-	local attributes = {
-		MODIFIER_ATTRIBUTE_MULTIPLE
-	}
-	return attributes
+	return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_mjz_shredder_reactive_armor_magic:DeclareFunctions()
@@ -174,10 +168,7 @@ function modifier_mjz_shredder_reactive_armor_regen:IsHidden() return true end
 function modifier_mjz_shredder_reactive_armor_regen:IsPurgable() return false end
 
 function modifier_mjz_shredder_reactive_armor_regen:GetAttributes()
-	local attributes = {
-		MODIFIER_ATTRIBUTE_MULTIPLE
-	}
-	return attributes
+	return MODIFIER_ATTRIBUTE_MULTIPLE
 end
 
 function modifier_mjz_shredder_reactive_armor_regen:DeclareFunctions()
