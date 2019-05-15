@@ -13,7 +13,6 @@ function ability_class:GetIntrinsicModifierName()
 	return "modifier_mjz_monkey_king_jingu_mastery_counter"
 end
 
-
 ---------------------------------------------------------------------------------------
 
 modifier_mjz_monkey_king_jingu_mastery_counter = class({})
@@ -30,35 +29,45 @@ if IsServer() then
     end
 
     function modifier_counter:OnAttackLanded(keys)
+        if keys.attacker ~= self:GetParent() then return nil end
+        if keys.attacker:PassivesDisabled() then return nil end
+        if not self:_IsEnemy(keys.target) then return nil end
+
         local attacker = keys.attacker
         local target = keys.target
-        
-        if attacker == self:GetParent() then
-            if attacker:GetTeam() == target:GetTeam() then return nil end
-			if attacker:PassivesDisabled() then return nil end
 
-			local ability = self:GetAbility()
-			local required_hits = ability:GetSpecialValueFor("required_hits")
-			local counter_duration = ability:GetSpecialValueFor("counter_duration")
-			local max_duration = ability:GetSpecialValueFor("max_duration")
+        local ability = self:GetAbility()
+        local required_hits = ability:GetSpecialValueFor("required_hits")
+        local counter_duration = ability:GetSpecialValueFor("counter_duration")
+        local max_duration = ability:GetSpecialValueFor("max_duration")
 
-			local not_has_modifier_hit = not attacker:HasModifier(MODIFIER_HIT_NAME)
-			local not_has_modifier_buff = not attacker:HasModifier(MODIFIER_BUFF_NAME)
-            if not_has_modifier_hit and not_has_modifier_buff then
-                attacker:AddNewModifier(attacker, ability, MODIFIER_HIT_NAME, {duration = counter_duration})
+        local not_has_modifier_hit = not attacker:HasModifier(MODIFIER_HIT_NAME)
+        local not_has_modifier_buff = not attacker:HasModifier(MODIFIER_BUFF_NAME)
+        if not_has_modifier_hit and not_has_modifier_buff then
+            attacker:AddNewModifier(attacker, ability, MODIFIER_HIT_NAME, {duration = counter_duration})
+        end
+
+        local modifier_hit = attacker:FindModifierByName(MODIFIER_HIT_NAME)
+        if modifier_hit then
+            modifier_hit:SetDuration(counter_duration, true)
+            modifier_hit:IncrementStackCount()
+            if modifier_hit:GetStackCount() >= required_hits then
+                modifier_hit:Destroy()
+                attacker:AddNewModifier(attacker, ability, MODIFIER_BUFF_NAME, {duration = max_duration})
             end
-
-			local modifier_hit = attacker:FindModifierByName(MODIFIER_HIT_NAME)
-			if modifier_hit then
-				modifier_hit:SetDuration(counter_duration, true)
-				modifier_hit:IncrementStackCount()
-				if modifier_hit:GetStackCount() >= required_hits then
-					modifier_hit:Destroy()
-					attacker:AddNewModifier(attacker, ability, MODIFIER_BUFF_NAME, {duration = max_duration})
-				end
-			end
         end
     end
+
+    function modifier_counter:_IsEnemy(target)
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local nTargetTeam = ability:GetAbilityTargetTeam()
+		local nTargetType = ability:GetAbilityTargetType()
+		local nTargetFlags = ability:GetAbilityTargetFlags()
+		local nTeam = caster:GetTeamNumber()
+		local ufResult = UnitFilter(target, nTargetTeam, nTargetType, nTargetFlags, nTeam)
+		return ufResult == UF_SUCCESS
+	end
 end
 
 
@@ -116,7 +125,7 @@ if IsServer() then
 		local parent = self:GetParent()
 
 		local charges = self:GetAbility():GetSpecialValueFor("charges")
-		self:SetStackCount(charges)
+		-- self:SetStackCount(charges)
 
 		self.modifier_bonus_damage = 'modifier_mjz_monkey_king_jingu_mastery_bonus_damage'
 		parent:AddNewModifier(caster, ability, self.modifier_bonus_damage, {})
@@ -153,10 +162,13 @@ if IsServer() then
 
 			self:DisplayHitEffect(keys.target)
 
-			self:DecrementStackCount()
-			if self:GetStackCount() <= 0 then
-				self:Destroy() 
-			end
+            --[[
+                self:DecrementStackCount()
+                if self:GetStackCount() <= 0 then
+                    self:Destroy() 
+                end
+            ]]
+			
         end
 	end
 
