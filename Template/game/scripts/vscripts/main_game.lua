@@ -17,7 +17,6 @@ end
 
 
 require("lib/timers_v1_05")
-require("utils/client_util")
 require("utils/mjz_util")
 
 require('systems/courier_system')

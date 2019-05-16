@@ -218,3 +218,20 @@ function GetTalentSpecialValueFor(ability, value)
     return base
 end
 
+
+function KillTreesInRadius(caster, center, radius)
+    local particles = {
+        "particles/newplayer_fx/npx_tree_break.vpcf",
+        "particles/newplayer_fx/npx_tree_break_b.vpcf",
+    }
+    local particle = particles[math.random(1, #particles)]
+
+    local trees = GridNav:GetAllTreesAroundPoint(center, radius, true)
+    for _,tree in pairs(trees) do
+        local particle_fx = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN, caster)
+        ParticleManager:SetParticleControl(particle_fx, 0, tree:GetAbsOrigin())
+        ParticleManager:ReleaseParticleIndex(particle_fx)
+    end
+    GridNav:DestroyTreesAroundPoint(center, radius, false)
+end
+
