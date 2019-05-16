@@ -1,0 +1,9 @@
+    
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_1"	"G"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_2"	"L"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_3"	"O"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_4"	"U"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_5"	"O"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_6"	"C"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_7"	"D"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_8"	"K"

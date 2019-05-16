@@ -1,0 +1,10 @@
+	
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_1"	"拒绝盗版游戏"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_2"	"抵制不良游戏"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_3"	"谨防受骗上当"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_4"	"注意自我保护"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_5"	"沉迷游戏伤身"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_6"	"适度游戏益脑"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_7"	"享受健康生活"
+	"DOTA_Tooltip_ability_special_bonus_unique_mjz_health_game_advice_8"	"合理安排时间"
+	
