@@ -1,4 +1,20 @@
 
+
+-----------------------------------------------------------------------------------
+--  Dev Command
+Convars:RegisterCommand( "mjz_dummy_target", function(...) 
+    local unit = PlayerInstanceFromIndex(1):GetAssignedHero()	
+    local vLocation = unit:GetAbsOrigin()
+    CreateUnit_DummyTarget(vLocation, DOTA_GC_TEAM_BAD_GUYS, unit:GetPlayerID())
+end, "dummy_target", FCVAR_CHEAT )
+
+Convars:RegisterCommand( "mjz_hero_all_modifiers", function(...) 
+    print_hero_all_modifiers()
+end, "print_hero_all_modifiers", FCVAR_CHEAT )
+
+-----------------------------------------------------------------------------------
+
+
 function print_all_hero_point( )
     CallAllHeroFunc(function(hero)
         local p_id = hero:GetPlayerID()
