@@ -1,0 +1,93 @@
+
+	//=================================================================================================================
+	// Windrunner: Focus Fire
+	//=================================================================================================================
+	"mjz_windrunner_focusfire"
+	{
+		"BaseClass"						"ability_lua"	// "ability_datadriven"
+		"ScriptFile"					"abilities/hero_windrunner/mjz_windrunner_focusfire.lua"
+		"AbilityTextureName"			"mjz_windrunner_focusfire_red"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilitySound"					"Ability.Focusfire"
+
+		"HasScepterUpgrade"				"1"
+
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		
+		"AbilityCooldown"				"70"
+		"AbilityManaCost"				"75 100 125"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_speed"			"425"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_reduction"				"-50 -40 -30"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_reduction_scepter"		"-30 -15 -0"
+			}						
+			"04"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"ministun_chance"				"0" 
+				"LinkedSpecialBonus"			"special_bonus_unique_mjz_windrunner_focusfire_ministun"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"ministun_duration"				"0.01" 
+			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"20.0"
+			}
+			"10"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"cooldown_scepter"				"15.0 15.0 15.0"
+			}
+			"11"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"focusfire_fire_on_the_move"	"1"
+			}
+			
+		}
+
+		"precache"
+		{
+			"soundfile" 	"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
+		}
+	}
+	"special_bonus_unique_mjz_windrunner_focusfire_ministun"
+	{
+		"BaseClass"						"special_bonus_undefined"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"35"
+			}
+		}
+	}
