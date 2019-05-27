@@ -72,6 +72,8 @@ function MainGame:InitGameMode()
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS,0)
 	-- 不能自动重生，死亡墓碑上显示玩家名字
 	-- GameRules:SetHeroRespawnEnabled( false )
+	-- 第一滴血是否激活
+	-- GameRules:SetFirstBloodActive(false)
 
 	-- 是否关闭战争迷雾 
 	GameRules:GetGameModeEntity():SetFogOfWarDisabled(false)
