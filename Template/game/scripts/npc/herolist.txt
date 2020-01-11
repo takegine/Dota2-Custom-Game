@@ -123,4 +123,6 @@
   "npc_dota_hero_witch_doctor" "1"              // 巫医
   "npc_dota_hero_zuus" "1"                      // 宙斯
   "npc_dota_hero_mars" "1"						// 玛尔斯
+  "npc_dota_hero_void_spirit"	"1"				// 虚无之灵（紫猫）
+  "npc_dota_hero_snapfire"		"1"				// 电炎绝手（老奶奶）
 }
