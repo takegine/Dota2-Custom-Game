@@ -44,9 +44,9 @@
 
 | 名称                                                | 说明                                       |
 | --------------------------------------------------- | ------------------------------------------ |
-| [虚灵之刃](Item/mjz_ethereal_blade/README.md)       | 分别三种不同属性加成的虚灵之刃，一共两等级 |
+| [虚灵之刃 系列](Item/mjz_ethereal_blade/README.md)  | 分别三种不同属性加成的虚灵之刃，一共五等级 |
 | [红色的圣剑](Item/red_divine_rapier/README.md)      | 武器增加到五个等级，死亡后不会掉落         |
-| [红色蝴蝶、蓝色蝴蝶](Item/mjz_butterfly/README.md)  | 分别两种不同属性加成的蝴蝶                 |
+| [蝴蝶 系列](Item/mjz_butterfly/README.md)           | 分别三种不同属性加成的虚灵之刃，一共五等级 |
 | [金箍棒 系列](Item/mjz_monkey_king_bar/README.md)   | 增加到五个等级，提高属性加成               |
 | [真正的金箍棒](Item/real_monkey_king_bar/README.md) | 主动技能：棒击大地                         |
 | [霜之哀伤](Item/mjz_frostmourne/README.md)          | 大概算是一把神器                           |
@@ -105,8 +105,9 @@
 | [斯嘉蒂之眼 系列](Item/mjz_skadi/README.md)       | 增加到五个等级，提高属性加成               |
 | [雷神之锤 系列](Item/mjz_mjollnir/README.md)      | 增加到五个等级，提高属性加成               |
 | [慧光 系列](Item/mjz_kaya/README.md)              | 增加到五个等级，提高属性加成               |
-| [ 黯灭 系列](Item/mjz_desolator/README.md)        | 增加到五个等级，提高属性加成               |
+| [黯灭 系列](Item/mjz_desolator/README.md)         | 增加到五个等级，提高属性加成               |
 | [可食用的魔龙枪](Item/mjz_dragon_lance/README.md) | 永久增加远程英雄的攻击距离                 |
+| [吸魔箭](Item/mjz_mana_staff/README.md)           | 攻击敌人吸取魔法值                         |
 
 
 
