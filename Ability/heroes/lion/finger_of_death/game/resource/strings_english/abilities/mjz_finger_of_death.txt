@@ -1,5 +1,5 @@
     
-	"DOTA_Tooltip_ability_mjz_finger_of_death"				    	"Finger of Death""
+	"DOTA_Tooltip_ability_mjz_finger_of_death"				    	"Finger of Death"
 	"DOTA_Tooltip_ability_mjz_finger_of_death_Description"	    	"Rips at an enemy unit, trying to turn it inside-out. Deals massive damage and grows stronger with each life it consumes.\n\nUpgradable by Aghanim's Scepter."
 	"DOTA_Tooltip_ability_mjz_finger_of_death_Aghanim_Description"	"Increases damage. Decreases cooldown. Finger of Death hits all units in a small area."
 	"DOTA_Tooltip_ability_mjz_finger_of_death_Lore"	    			"Lion's disfigured hand is also the source of his greatest power, capable of flooding victims with malefic force."
