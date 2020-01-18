@@ -1,6 +1,24 @@
-醉拳
+# 醉拳
 
-![mjz_centaur_return](game/resource/flash3/images/spellicons/mjz_brewmaster_drunken_brawler.png)
+![](game/resource/flash3/images/spellicons/mjz_brewmaster_drunken_brawler.png)
 
 有一定概率闪避攻击并能造成致命一击。进入醉拳状态时，提高闪避攻击和致命一击的几率。
+
+**闪避**：10% 15% 20% 25%
+
+**致命一击概率**：10% 15% 20% 25%
+
+**致命一击伤害**：200%
+
+**闪避（激活）**：50% 60% 70% 80%
+
+**致命一击概率（激活）**：50% 60% 70% 80%
+
+**致命一击伤害（激活）**：260%（天赋+175%）
+
+**持续时间**：6
+
+**冷却时间**：23/21/19/17
+
+**魔法消耗**：35/40/45/50
 
