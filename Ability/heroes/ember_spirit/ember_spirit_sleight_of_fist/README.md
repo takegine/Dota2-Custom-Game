@@ -14,9 +14,9 @@ Ember Spirit dashes around with blazing speed, attacking all enemies in the targ
 
 **攻击力加成**：40/80/120/160
 
-**暴击几率**：20%/25%/30%
+**暴击几率**：20%/25%/30%/35%
 
-**暴击伤害**：200%/250%/300%
+**暴击伤害**：200%/250%/300%/350%
 
 **充能点数**：0（天赋 2）
 

@@ -53,12 +53,12 @@
 			"11"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"crit_chance"				"20 25 30"
+				"crit_chance"				"20 25 30 35"
 			}
 			"12"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"crit_bonus"				"200 250 300"
+				"crit_bonus"				"200 250 300 350"
 			}
 		}
 
