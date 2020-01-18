@@ -1,6 +1,6 @@
 # 噬魂鬼
 
-
+### [狂暴](life_stealer_rage/README.md)
 
 ### [盛宴](life_stealer_feast/README.md)
 
