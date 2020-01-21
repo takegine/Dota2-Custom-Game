@@ -78,6 +78,7 @@ if IsServer() then
         local parent = self:GetParent()
         local ability = self:GetAbility()
 		local radius = ability:GetSpecialValueFor('radius')
+		radius = radius + parent:GetCastRangeBonus()
 
 		EmitSoundOn("Hero_Gyrocopter.Rocket_Barrage.Launch", parent)
 

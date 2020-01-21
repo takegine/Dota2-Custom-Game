@@ -1,0 +1,9 @@
+
+	"npc_dota_hero_gyrocopter_mjz"			
+	{
+		"override_hero"			"npc_dota_hero_gyrocopter"
+
+		"Ability1"				"mjz_gyrocopter_rocket_barrage"
+		"Ability13"		"special_bonus_unique_mjz_gyrocopter_rocket_barrage_damage"
+	}
+	
