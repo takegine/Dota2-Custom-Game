@@ -14,10 +14,23 @@ function ability_class:GetIntrinsicModifierName()
 end
 
 function ability_class:GetAOERadius()
-	return self:GetSpecialValueFor('radius')
+	return self:GetSpecialValueFor('radius') + self:GetParent():GetCastRangeBonus()
 end
 function ability_class:GetCastRange(vLocation, hTarget)
-	return self:GetSpecialValueFor('radius')
+	return self:GetSpecialValueFor('radius') + self:GetParent():GetCastRangeBonus()
+end
+
+function ability_class:OnToggle()
+	if IsServer() then
+		local ability = self
+		local caster = self:GetCaster()
+
+		if ability:GetToggleState() then
+			--caster:AddNewModifier( caster, ability, "", nil )
+		else
+			--caster:RemoveModifierByName("")
+		end
+	end
 end
 
 -----------------------------------------------------------------------------------------
@@ -60,7 +73,7 @@ function modifier_class:GetAuraSearchFlags()
 end
 
 function modifier_class:GetAuraRadius()
-	return self:GetAbility():GetSpecialValueFor( "radius" )
+	return self:GetAbility():GetSpecialValueFor( "radius" ) + self:GetParent():GetCastRangeBonus()
 end
 
 -----------------------------------------------------------------------------------------
@@ -164,14 +177,18 @@ if IsServer() then
 	end
 
 	function modifier_effect:OnIntervalThink()
+		if not self:_Enabled() then return nil end
+
 		local parent = self:GetParent()
 		local caster = self:GetCaster()
 		local ability = self:GetAbility()
 		local target = self:GetParent()
 
+		local interval = ability:GetSpecialValueFor('interval')
 		local base_damage = ability:GetSpecialValueFor("base_damage")
 		local intelligence_damage = GetTalentSpecialValueFor(ability, "intelligence_damage")
 		local damage = base_damage + caster:GetIntellect() * (intelligence_damage / 100.0)
+		damage = damage * interval
 
 		ApplyDamage({
 			attacker = caster,
@@ -180,6 +197,11 @@ if IsServer() then
 			damage_type = ability:GetAbilityDamageType(),
 			damage = damage
 		})
+	end
+
+	function modifier_effect:_Enabled( )
+		local ability = self:GetAbility()
+		return ability:GetToggleState()
 	end
 
 end
