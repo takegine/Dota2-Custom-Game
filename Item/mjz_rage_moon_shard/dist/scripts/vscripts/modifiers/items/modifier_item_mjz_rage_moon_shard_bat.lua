@@ -1,17 +1,17 @@
-modifier_base_attack_time = class({})
+modifier_item_mjz_rage_moon_shard_bat = class({})
 
-local modifier = modifier_base_attack_time
+local modifier = modifier_item_mjz_rage_moon_shard_bat
 
 function modifier:IsHidden()
 	return true
 end
 
-function modifier:IsDebuff()
+function modifier:IsPurgable()
 	return false
 end
 
-function modifier:IsPurgable()
-	return false
+function modifier:GetAttributes() 
+	return MODIFIER_ATTRIBUTE_PERMANENT 
 end
 
 function modifier:DeclareFunctions()

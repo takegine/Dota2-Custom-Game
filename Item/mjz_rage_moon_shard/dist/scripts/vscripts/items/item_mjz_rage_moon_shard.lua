@@ -1,11 +1,12 @@
 
-LinkLuaModifier( "modifier_item_mjz_rage_moon_shard",  "modifiers/item/modifier_item_mjz_rage_moon_shard.lua",LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_mjz_rage_moon_shard_stats",  "modifiers/item/modifier_item_mjz_rage_moon_shard_stats.lua",LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_base_attack_time",  "modifiers/modifier_base_attack_time.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_rage_moon_shard",  "modifiers/items/modifier_item_mjz_rage_moon_shard.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_rage_moon_shard_stats",  "modifiers/items/modifier_item_mjz_rage_moon_shard_stats.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_rage_moon_shard_bat",  "modifiers/items/modifier_item_mjz_rage_moon_shard_bat.lua",LUA_MODIFIER_MOTION_NONE )
 
 
 local modifier = 'modifier_item_mjz_rage_moon_shard'
 local modifier_stats = 'modifier_item_mjz_rage_moon_shard_stats'
+local MODIFIER_BASE_ATTACK_TIME = 'modifier_item_mjz_rage_moon_shard_bat'
 
 function OnEquip( keys )
     if not IsServer() then return nil end
@@ -71,7 +72,7 @@ function OnSpellStart( keys )
 end
 
 function AddModifier_BaseAttackTime( caster, ability, target )
-    local modifer_attack_time_name = 'modifier_base_attack_time'
+    local modifer_attack_time_name = MODIFIER_BASE_ATTACK_TIME
     if target:HasModifier(modifer_attack_time_name) then
 		return nil
     end
