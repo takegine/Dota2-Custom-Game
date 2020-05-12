@@ -11,6 +11,10 @@ function modifier:IsPurgable()
     return false
 end
 
+function modifier:GetAttributes() 
+	return MODIFIER_ATTRIBUTE_PERMANENT 
+end
+
 function modifier:GetTexture()
 	return "modifiers/mjz_aether_lens"  -- "item_mjz_aether_lens"
 end

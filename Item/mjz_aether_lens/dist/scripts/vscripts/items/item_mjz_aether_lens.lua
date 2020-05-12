@@ -1,6 +1,6 @@
 
-LinkLuaModifier( "modifier_item_mjz_aether_lens",  "modifiers/modifier_item_mjz_aether_lens.lua",LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_mjz_aether_lens_stats",  "modifiers/modifier_item_mjz_aether_lens_stats.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_aether_lens",  "modifiers/items/modifier_item_mjz_aether_lens.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_aether_lens_stats",  "modifiers/items/modifier_item_mjz_aether_lens_stats.lua",LUA_MODIFIER_MOTION_NONE )
 
 function OnEquip( keys )
     if not IsServer() then return nil end
