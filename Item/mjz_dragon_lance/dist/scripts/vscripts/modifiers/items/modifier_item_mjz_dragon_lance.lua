@@ -11,6 +11,10 @@ function modifier:IsPurgable()
     return false
 end
 
+function modifier:GetAttributes() 
+	return MODIFIER_ATTRIBUTE_PERMANENT 
+end
+
 function modifier:GetTexture()
 	return "modifiers/mjz_dragon_lance"  -- "item_mjz_dragon_lance"
 end

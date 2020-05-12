@@ -1,6 +1,6 @@
 
-LinkLuaModifier( "modifier_item_mjz_dragon_lance",  "modifiers/modifier_item_mjz_dragon_lance.lua",LUA_MODIFIER_MOTION_NONE )
-LinkLuaModifier( "modifier_item_mjz_dragon_lance_stats",  "modifiers/modifier_item_mjz_dragon_lance_stats.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_dragon_lance",  "modifiers/items/modifier_item_mjz_dragon_lance.lua",LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_item_mjz_dragon_lance_stats",  "modifiers/items/modifier_item_mjz_dragon_lance_stats.lua",LUA_MODIFIER_MOTION_NONE )
 
 function OnEquip( keys )
     if not IsServer() then return nil end
