@@ -162,7 +162,7 @@ if IsServer() then
 
 		local base_damage = GetTalentSpecialValueFor(ability, 'damage')
 		local percent_damage = GetTalentSpecialValueFor(ability, 'percent_damage')
-		local damage = base_damage + (base_damage / 100 * parent:GetMaxHealth())
+		local damage = base_damage + (percent_damage / 100 * parent:GetMaxHealth())
 		damage = damage * tick_interval
 
 		local postDmg = ApplyDamage({
