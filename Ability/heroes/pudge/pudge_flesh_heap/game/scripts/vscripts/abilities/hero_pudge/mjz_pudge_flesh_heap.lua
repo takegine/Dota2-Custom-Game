@@ -24,7 +24,6 @@ function modifier_class:IsPurgable() return false end
 
 if IsServer() then
     function modifier_class:OnCreated( kv )
-
         local parent = self:GetParent()
         local caster = self:GetCaster()
         local ability = self:GetAbility()
@@ -41,6 +40,7 @@ if IsServer() then
     end
 
     function modifier_class:OnIntervalThink()
+		local caster = self:GetCaster()
         local parent = self:GetParent()
         local ability = self:GetAbility()
 
@@ -49,13 +49,17 @@ if IsServer() then
 
         local m_mrb = parent:FindModifierByName("modifier_mjz_pudge_flesh_heap_mrb")
         if m_mrb then
-            m_mrb:SetStackCount(magic_damage_reduction_pct)   
+            m_mrb:SetStackCount(magic_damage_reduction_pct) 
+		else
+			parent:AddNewModifier(caster, ability, "modifier_mjz_pudge_flesh_heap_mrb", {})
         end
 
         local m_str = parent:FindModifierByName("modifier_mjz_pudge_flesh_heap_str")
         if m_str then
             local bonus_str = self:CalcBonusStrength(parent, primary_attribute_per)
-            m_str:SetStackCount(bonus_str)   
+            m_str:SetStackCount(bonus_str)
+		else
+			parent:AddNewModifier(caster, ability, "modifier_mjz_pudge_flesh_heap_str", {})
         end
 
     end
