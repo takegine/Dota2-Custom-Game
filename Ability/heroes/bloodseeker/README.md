@@ -6,3 +6,4 @@
 
 ### [自动施法 - 血怒](bloodseeker_bloodrage_autocast/README.md)
 
+### [割裂](bloodseeker_rupture/README.md)
