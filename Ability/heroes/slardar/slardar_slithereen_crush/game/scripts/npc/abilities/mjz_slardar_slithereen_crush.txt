@@ -1,7 +1,4 @@
-
-	//=================================================================================================================
-	// Slardar Slithereen Crush
-	//=================================================================================================================
+	
 	"mjz_slardar_slithereen_crush"
 	{
 		"BaseClass"						"ability_lua"	// "ability_datadriven"
@@ -14,6 +11,8 @@
         "AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		
+		"HasScepterUpgrade"				"1"
 
 		"AbilitySound"					"Hero_Slardar.Slithereen_Crush"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
@@ -64,6 +63,38 @@
 				"var_type"						"FIELD_FLOAT"
 				"slow_duration"					"3 4 5 6"
 			}
+			"14"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"puddle_regen"				"35"
+				"RequiresScepter"			"1"
+				
+			}
+			"15"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"puddle_armor"				"12"
+				"RequiresScepter"			"1"
+			}
+			"16"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"puddle_status_resistance"	"40"
+				"RequiresScepter"			"1"
+			}
+			"17"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"puddle_duration"			"25"
+				"RequiresScepter"			"1"
+			}
+			"18"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"puddle_radius"				"600"
+				"RequiresScepter"			"1"
+			}
+			
 		}
 
 		"precache"
@@ -71,6 +102,7 @@
 			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
 	  		"particle"		"particles/units/heroes/hero_slardar/slardar_crush.vpcf"
 	  		"particle"		"particles/units/heroes/hero_slardar/slardar_crush_entity.vpcf"
+			"particle"		"particles/units/heroes/hero_slardar/slardar_water_puddle.vpcf"
 		}
 	}
 	"special_bonus_unique_mjz_slardar_slithereen_crush_strength"

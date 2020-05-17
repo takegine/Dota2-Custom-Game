@@ -1,11 +1,18 @@
 
 local THIS_LUA = "abilities/hero_slardar/mjz_slardar_slithereen_crush.lua"
+local MODIFIER_LUA = "modifiers/hero_slardar/modifier_mjz_slardar_slithereen_crush.lua"
 
 local MODIFIER_SLOW_NAME = 'modifier_mjz_slardar_slithereen_crush_slow'
 -- local MODIFIER_ATTACK_SPEED_NAME = 'modifier_mjz_slardar_slithereen_crush_attack_speed'
+local MODIFIER_DUMMY_NAME = 'modifier_mjz_slardar_slithereen_crush_dummy'
+local MODIFIER_AURA_FRIENDLY_NAME = 'modifier_mjz_slardar_slithereen_crush_aura_friendly'
+local MODIFIER_AURA_ENEMY_NAME = 'modifier_mjz_slardar_slithereen_crush_aura_enemy'
 
 LinkLuaModifier(MODIFIER_SLOW_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
 -- LinkLuaModifier(MODIFIER_ATTACK_SPEED_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_DUMMY_NAME, MODIFIER_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_AURA_FRIENDLY_NAME, MODIFIER_LUA, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier(MODIFIER_AURA_ENEMY_NAME, MODIFIER_LUA, LUA_MODIFIER_MOTION_NONE)
 
 --------------------------------------------------------------------------------
 
@@ -68,7 +75,30 @@ if IsServer() then
 				unit:AddNewModifier(caster, ability, 'modifier_stunned', {duration = stun_duration})
 				unit:AddNewModifier(caster, ability, MODIFIER_SLOW_NAME, {duration = stun_duration + slow_duration})
             end
-        end
+		end
+		
+		if caster:HasScepter() then
+			local target_point = caster:GetAbsOrigin()
+			self:Puddle(target_point)
+		end
+	end
+
+	function ability_class:Puddle(target_point)
+		local ability = self
+		local caster = self:GetCaster()
+		local duration = GetTalentSpecialValueFor(ability, 'puddle_duration')
+		local puddle_radius = GetTalentSpecialValueFor(ability, 'puddle_radius')
+		
+		-- Dummy
+		local dummy_name = 'npc_dota_invisible_vision_source' -- npc_dummy_unit
+		local dummy = CreateUnitByName(dummy_name, target_point, false, caster, caster, caster:GetTeam())
+		dummy:AddNewModifier(caster, nil, "modifier_phased", {})
+		dummy:AddNewModifier(caster, ability, "modifier_kill", {duration = duration})
+		dummy:AddNewModifier(caster, ability, "modifier_item_gem_of_true_sight", {duration = duration})
+		dummy:AddNewModifier(caster, ability, MODIFIER_DUMMY_NAME, {duration = duration})
+		dummy:AddNewModifier(caster, ability, MODIFIER_AURA_FRIENDLY_NAME, {duration = duration})
+		--dummy:AddNewModifier(caster, ability, MODIFIER_AURA_ENEMY_NAME, {duration = duration})
+		
 	end
 
 end
