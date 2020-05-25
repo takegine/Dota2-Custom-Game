@@ -1,0 +1,7 @@
+
+function CAddonTemplateGameMode:InitGameMode()
+
+        -- 设定是否可以选择相同英雄
+		GameRules:SetSameHeroSelectionEnabled( false )
+
+end

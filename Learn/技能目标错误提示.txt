@@ -1,0 +1,25 @@
+function celebrimbor_overseer:CastFilterResultTarget( hTarget )
+	if self:GetCaster() == hTarget then
+		return UF_FAIL_CUSTOM
+	end
+
+	if hTarget:HasModifier("modifier_item_mind_gem_active") or hTarget:HasModifier("modifier_spawn_soul_trick") or hTarget:HasModifier("modifier_celebrimbor_overseer") then
+		return UF_FAIL_DOMINATED
+	end
+
+	local nResult = UnitFilter( hTarget, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, self:GetCaster():GetTeamNumber() )
+	if nResult ~= UF_SUCCESS then
+		return nResult
+	end
+
+	return UF_SUCCESS
+end
+
+--------------------------------------------------------------------------------
+
+function celebrimbor_overseer:GetCustomCastErrorTarget( hTarget )
+	if self:GetCaster() == hTarget then
+		return "#dota_hud_error_cant_cast_on_self"
+	end
+	return ""
+end
