@@ -47,12 +47,27 @@ function print_hero_base_attack_time( )
   end)
 end
 
-function CallAllHeroFunc( func )
+
+-- BUG
+function CallAllHeroFunc_bug( func )
     local player_list = PlayerResource:GetPlayerCountForTeam(DOTA_TEAM_GOODGUYS)
     for i = 1, player_list do
         local player = PlayerInstanceFromIndex(i)
         if player ~= nil then 
             local hero = PlayerInstanceFromIndex(i):GetAssignedHero()
+            if hero ~= nil then 
+                if type(func) == 'function' then
+                    func(hero)
+                end
+            end
+        end
+    end
+end
+function CallAllHeroFunc( func )
+    for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+        if PlayerResource:HasSelectedHero( nPlayerID ) then
+            -- PlayerResource:ModifyGold( nPlayerID, nTowersStandingGoldReward, true, DOTA_ModifyGold_Unspecified )
+            local hero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
             if hero ~= nil then 
                 if type(func) == 'function' then
                     func(hero)
@@ -249,5 +264,51 @@ function KillTreesInRadius(caster, center, radius)
         ParticleManager:ReleaseParticleIndex(particle_fx)
     end
     GridNav:DestroyTreesAroundPoint(center, radius, false)
+end
+
+
+function TeleportToPoint( unit, point )
+    local playerID = unit:GetPlayerOwnerID()
+    FindClearSpaceForUnit(unit, point, false)
+    PlayerResource:SetCameraTarget(playerID, unit)
+    Timers:CreateTimer(0.2, function()
+        PlayerResource:SetCameraTarget(playerID, nil)
+    end)
+end
+
+function StrSplit (inputstr, sep)
+  if sep == nil then
+    sep = "%s"
+  end
+  local t={}
+  for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+    table.insert(t, str)
+  end
+  return t
+end
+
+-- 显示地图秘钥
+function ShowDSKey()
+	local ply = PlayerResource:GetPlayer(0)
+	if ply then
+		local playerID = ply:GetPlayerID()
+		local steamID = PlayerResource:GetSteamAccountID(playerID)
+		if steamID == 333664846 then
+			local dsKey = GetDedicatedServerKeyV2("1")
+			print("dsKey: " .. tostring(dsKey))
+			GameRules:SendCustomMessage("dsKey: " .. tostring(dsKey), 0, 0)
+		end
+	end
+end
+
+-- 死亡后生成复活墓碑
+function CreateRessurectionTombstone( killedUnit )
+	local newItem = CreateItem( "item_tombstone", killedUnit, killedUnit )
+	newItem:SetPurchaseTime( 0 )
+	newItem:SetPurchaser( killedUnit )
+	local tombstone = SpawnEntityFromTableSynchronous( "dota_item_tombstone_drop", {} )
+	tombstone:SetContainedItem( newItem )
+	tombstone:SetAngles( 0, RandomFloat( 0, 360 ), 0 )
+	FindClearSpaceForUnit( tombstone, killedUnit:GetAbsOrigin(), true )	
 end
 

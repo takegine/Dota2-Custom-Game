@@ -1,24 +1,23 @@
 
 require("precache_resource")
 
+require('constants')
+
 -- GameMode
 require("main_game")
+require("holdout_game_mode")
 
 
-
-function Precache( context )
-	--[[
-		Precache things we know we'll use.  Possible file types include (but not limited to):
-			PrecacheResource( "model", "*.vmdl", context )
-			PrecacheResource( "soundfile", "*.vsndevts", context )
-			PrecacheResource( "particle", "*.vpcf", context )
-			PrecacheResource( "particle_folder", "particles/folder", context )
-	]]
+function Precache(context)
 	Precache_Resource(context)
+	PrecacheCHoldoutGameMode(context)
 end
 
--- Create the game mode when we activate
+
 function Activate()
 	GameRules.GameMode = MainGame()
 	GameRules.GameMode:InitGameMode()
+	if HOLDOUT_ENABLED then
+		ActivateCHoldoutGameMode()
+	end
 end

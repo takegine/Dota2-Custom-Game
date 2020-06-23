@@ -5,6 +5,17 @@ function MainGame:OnGameRulesStateChange()
 	if nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
         print("DOTA_GAMERULES_STATE_PRE_GAME")
         -- ShowGenericPopup( "#holdout_instructions_title", "#holdout_instructions_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
+	elseif nNewState == DOTA_GAMERULES_STATE_STRATEGY_TIME then
+        -- 玩家没选择的英雄，就随机一个英雄给他
+		for i=0, DOTA_MAX_TEAM_PLAYERS do
+			if PlayerResource:HasSelectedHero(i) == false then
+	            local player = PlayerResource:GetPlayer(i)
+	            if player then
+	            	print("Randoming hero for player ", i)
+	            	player:MakeRandomHeroSelection()
+	            end
+	        end
+	    end
     elseif newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
         print("DOTA_GAMERULES_STATE_HERO_SELECTION")
         if GameRules:State_Get() == DOTA_GAMERULES_STATE_HERO_SELECTION then
@@ -41,6 +52,24 @@ end
 function MainGame:OnEntityKilled( event )
 	local killedUnit = EntIndexToHScript( event.entindex_killed )
 	if not killedUnit then return end
+	
+	if killedUnit and killedUnit:IsRealHero() then
+        if HERO_RESSURECTION_TOMBSTONE then
+		    CreateRessurectionTombstone(killedUnit)
+        end
+		if killedUnit:IsReincarnating() == false and HERO_RESPAW_ENABLED then
+            --print("Setting time for respawn")
+            if HERO_MIN_RESPAWN_TIME ~= nil and HERO_MAX_RESPAWN_TIME ~= nil then
+                local respawn_time = killedUnit:GetLevel() * 2
+                if respawn_time < HERO_MIN_RESPAWN_TIME then
+                    respawn_time = HERO_MIN_RESPAWN_TIME
+                elseif respawn_time > HERO_MAX_RESPAWN_TIME then
+                    respawn_time = HERO_MAX_RESPAWN_TIME
+                end
+                killedUnit:SetTimeUntilRespawn(respawn_time)
+            end
+        end
+	end
 
     if killedUnit:IsRealHero() then
 
@@ -155,7 +184,9 @@ function MainGame:OnPlayerChat( keys )
     local teamonly = keys.teamonly  -- 是否是团队聊天
     local userid = keys.userid      -- 玩家id
 	local text = keys.text          -- 内容
-	
+	if self._ChatCommand then
+        self:_ChatCommand(userid, text)
+    end
 end
 
 function MainGame:OnPlayerPickHero(keys)

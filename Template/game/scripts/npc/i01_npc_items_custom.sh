@@ -54,3 +54,6 @@ echo -e "$all_content" >> $output_file
 
 # 自定义尾部内容
 echo -e "${output_foot}" >> $output_file
+
+
+python i02_npc_items_custom_id_generator.py

@@ -26,39 +26,23 @@ require("events")
 
 
 local IS_TEST = IsInToolsMode()
-local START_GOLD = 2000
-local MIN_RESPAWN_TIME = 5
-local MAX_RESPAWN_TIME = 60
 
 local mCourierSystem = nil
 
 function MainGame:InitGameMode()
+	-- -- 设置自动开始前的等待时间。
+	GameRules:SetCustomGameSetupAutoLaunchDelay(5)
+	-- -- 设置选择英雄时间
+	GameRules:SetHeroSelectionTime(60)
+	-- -- 设置决策时间
+	GameRules:SetStrategyTime(10)
+	-- -- 设置展示时间
+	GameRules:SetShowcaseTime(5)
+	-- -- 设置游戏准备时间
+	GameRules:SetPreGameTime(30)
 
-    if IsInToolsMode() then
-		-- 启用 (true)或禁用 (false) 自定义游戏的自动设置。
-		GameRules:EnableCustomGameSetupAutoLaunch(true)
-		-- 设置自动开始前的等待时间。
-		GameRules:SetCustomGameSetupAutoLaunchDelay(0)
-		-- 设置游戏的设置时间，0 = 立即开始 -1 = 等待直到设置完毕。
-        -- GameRules:SetCustomGameSetupRemainingTime(0)
-
-        -- 设置选择英雄时间
-		GameRules:SetHeroSelectionTime(0)
-		-- 设置决策时间
-		GameRules:SetStrategyTime(0)
-		-- 设置展示时间
-		GameRules:SetShowcaseTime(0)
-		-- 设置游戏准备时间
-        GameRules:SetPreGameTime(0)
-
-        -- GameRules:GetGameModeEntity():SetMaximumAttackSpeed(1000)
-    else
-        -- 设置选择英雄时间
-		GameRules:SetHeroSelectionTime(60)
-	end
-	
 	-- 设定游戏结束后在分数面板的停留时间
-	GameRules:SetPostGameTime( 60.0 )
+	-- GameRules:SetPostGameTime( 60.0 )
 	-- 任何一家商店都可以购买全部物品，不用到野外商店购买
     GameRules:SetUseUniversalShopMode(true)
     -- 树木再生时间
@@ -71,9 +55,9 @@ function MainGame:InitGameMode()
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS,5)
 	GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS,0)
 	-- 不能自动重生，死亡墓碑上显示玩家名字
-	-- GameRules:SetHeroRespawnEnabled( false )
+	GameRules:SetHeroRespawnEnabled( HERO_RESPAW_ENABLED )
 	-- 第一滴血是否激活
-	-- GameRules:SetFirstBloodActive(false)
+	GameRules:SetFirstBloodActive(false)
 
 	-- 是否关闭战争迷雾 
 	GameRules:GetGameModeEntity():SetFogOfWarDisabled(false)
@@ -87,12 +71,42 @@ function MainGame:InitGameMode()
 	GameRules:GetGameModeEntity():SetRemoveIllusionsOnDeath( true )
 	-- 设置初始金钱
 	-- GameRules:SetStartingGold(600)	
+	-- 设置每个时间间隔获得的金币
+	GameRules:SetGoldPerTick(0)
+	-- 设置获得金币的时间周期
+	GameRules:SetGoldTickTime(0)
 	-- 禁用死亡时损失金钱
 	GameRules:GetGameModeEntity():SetLoseGoldOnDeath( false )
 	-- 允许/禁止英雄买活
 	-- GameRules:GetGameModeEntity():SetBuybackEnabled( false ) 
+	
+    if IsInToolsMode() then
+		-- 启用 (true)或禁用 (false) 自定义游戏的自动设置。
+		-- GameRules:EnableCustomGameSetupAutoLaunch(true)
+		-- -- 设置自动开始前的等待时间。
+		GameRules:SetCustomGameSetupAutoLaunchDelay(0)
+		-- -- 设置游戏的设置时间，0 = 立即开始 -1 = 等待直到设置完毕。
+        -- -- GameRules:SetCustomGameSetupRemainingTime(0)
+
+        -- -- 设置选择英雄时间
+		-- GameRules:SetHeroSelectionTime(0)
+		-- -- 设置决策时间
+		GameRules:SetStrategyTime(0)
+		-- -- 设置展示时间
+		GameRules:SetShowcaseTime(0)
+		-- -- 设置游戏准备时间
+		GameRules:SetPreGameTime(0)
+		
+		GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS,5)
+
+        -- GameRules:GetGameModeEntity():SetMaximumAttackSpeed(1000)
+	end
+	
+	
+
+	
 	-- 自定义英雄的最大等级
-    CustomHeroLevel()
+    --CustomHeroLevel()
     
     self:_RegisterCommand()
 
@@ -173,7 +187,55 @@ end
 
 function MainGame:_RegisterCommand( )
     -- Custom console commands
-    Convars:RegisterCommand( "test_func", function(...) return print( ... ) end, "Test Function.", FCVAR_CHEAT )
+	Convars:RegisterCommand( "test_func", function(...) return print( ... ) end, "Test Function.", FCVAR_CHEAT )
+	
+	Convars:RegisterCommand( "mjz_hero_point", function(command) 
+        print_all_hero_point()
+    end, "mjz_hero_point", FCVAR_CHEAT )
+
+    Convars:RegisterCommand( "mjz_hero_all_modifiers", function(command) 
+        print_hero_all_modifiers()
+    end, "mjz_hero_all_modifiers", FCVAR_CHEAT )
+
+    Convars:RegisterCommand( "mjz_hero_base_attack_time", function(command) 
+        print_hero_base_attack_time()
+    end, "mjz_hero_base_attack_time", FCVAR_CHEAT )
+    
+    Convars:RegisterCommand( "mjz_clear_tree", function(command) 
+        local point = PlayerInstanceFromIndex(1):GetAssignedHero():GetAbsOrigin()
+        local radius = 1000
+        GridNav:DestroyTreesAroundPoint( point, radius, false )        
+    end, "mjz_clear_tree", FCVAR_CHEAT )
+
+    Convars:RegisterCommand( "mjz_show_modifier", function(command, modifier_name) 
+        local hero = PlayerInstanceFromIndex(1):GetAssignedHero()
+        local modifier = hero:FindModifierByName(modifier_name)
+        if modifier then
+            print('Show Modifier: '..modifier_name)
+            for k,v in pairs(modifier) do
+                print("    ",k,v)
+            end
+        end
+    end, "mjz_show_modifier", FCVAR_CHEAT )
+
+    Convars:RegisterCommand( "mjz_show_ability", function(command, ability_name) 
+        local hero = PlayerInstanceFromIndex(1):GetAssignedHero()
+        local ability = hero:FindAbilityByName(ability_name)
+        if ability then
+            print('Show Ability: '..ability_name)
+            for k,v in pairs(ability) do
+                print("    ",k,v)
+            end
+        end
+    end, "mjz_show_ability", FCVAR_CHEAT )
+end
+
+
+function MainGame:_ChatCommand(userid, text)
+	if text == nil then return nil end
+	if string.lower(text) == string.lower( "-DSkey") then
+		ShowDSKey()
+	end
 end
 
 function MainGame:_OnStartGame(  )
@@ -182,7 +244,7 @@ function MainGame:_OnStartGame(  )
 			self:_Test_StartGame(hero)
 		else
 			local currentGold = hero:GetGold()
-			local newGold = currentGold + START_GOLD
+			local newGold = currentGold + HERO_START_GOLD
 			hero:SetGold(newGold, false)	
 
 			if hero:HasAnyAvailableInventorySpace() then
