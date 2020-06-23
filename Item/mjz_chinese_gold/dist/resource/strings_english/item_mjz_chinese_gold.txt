@@ -1,0 +1,24 @@
+	
+
+		//>>>>	
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1"	                        "Chinese Gold 100"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_description"	                        "Convert into gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2"	                        "Chinese Gold 1000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_description"	                        "Convert into gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3"	                        "Chinese Gold 10000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_description"	                        "Convert into gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4"	                        "Chinese Gold 100000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_description"	                        "Convert into gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5"	                        "Chinese Gold 1000000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_description"	                        "Convert into gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_sell"	                        "Chinese Gold 100"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_sell_description"	                        "Sell the gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_sell"	                        "Chinese Gold 1000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_sell_description"	                        "Sell the gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_sell"	                        "Chinese Gold 10000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_sell_description"	                        "Sell the gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_sell"	                        "Chinese Gold 100000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_sell_description"	                        "Sell the gold."
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_sell"	                        "Chinese Gold 1000000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_sell_description"	                        "Sell the gold."
+		//<<<<

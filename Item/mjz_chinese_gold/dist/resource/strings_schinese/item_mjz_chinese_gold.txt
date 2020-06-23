@@ -1,0 +1,24 @@
+	
+
+		//>>>>	
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1"	                        "元宝 100"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_description"	                        "兑换成黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2"	                        "元宝 1000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_description"	                        "兑换成黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3"	                        "元宝 10000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_description"	                        "兑换成黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4"	                        "元宝 100000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_description"	                        "兑换成黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5"	                        "元宝 1000000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_description"	                        "兑换成黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_sell"	                        "黄金 100"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_1_sell_description"	                        "出售这些黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_sell"	                        "黄金 1000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_2_sell_description"	                        "出售这些黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_sell"	                        "黄金 10000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_3_sell_description"	                        "出售这些黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_sell"	                        "黄金 100000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_4_sell_description"	                        "出售这些黄金。"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_sell"	                        "黄金 1000000"
+		"DOTA_Tooltip_Ability_item_mjz_chinese_gold_5_sell_description"	                        "出售这些黄金。"
+		//<<<<

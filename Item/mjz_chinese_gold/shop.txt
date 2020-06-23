@@ -1,0 +1,13 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		"item"		"item_mjz_chinese_gold_1"
+		"item"		"item_mjz_chinese_gold_2"
+		"item"		"item_mjz_chinese_gold_3"
+		"item"		"item_mjz_chinese_gold_4"
+		"item"		"item_mjz_chinese_gold_5"
+
+	}
+	
+}

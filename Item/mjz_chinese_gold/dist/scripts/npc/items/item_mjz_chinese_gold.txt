@@ -1,0 +1,254 @@
+
+	"item_mjz_chinese_gold_1"
+	{
+		"ID"							"70160"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold_origin"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+
+		"ItemCost"						"100"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "1"						//可以买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"0"						//不可叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"1"
+	}
+	"item_mjz_chinese_gold_2"
+	{
+		"ID"							"70160"	
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"AbilityTextureName"			"mjz_chinese_gold_origin"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+
+		"ItemCost"						"1000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "1"						//可以买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"0"						//不可叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"2"
+	}
+	"item_mjz_chinese_gold_3"
+	{
+		"ID"							"70162"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold_origin"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+
+		"ItemCost"						"10000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "1"						//可以买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"0"						//不可叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"3"
+	}
+	"item_mjz_chinese_gold_4"
+	{
+		"ID"							"70164"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold_origin"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+
+		"ItemCost"						"100000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "1"						//可以买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"0"						//不可叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"4"
+	}
+	"item_mjz_chinese_gold_5"
+	{
+		"ID"							"70166"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold_origin"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+
+		"ItemCost"						"1000000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "1"						//可以买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"0"						//不可叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"5"
+	}
+	"item_mjz_chinese_gold_1_sell"
+	{
+		"ID"							"70160"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"ItemCost"						"100"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "0"						//不可买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"1"						//可以叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"1"
+	}
+	"item_mjz_chinese_gold_2_sell"
+	{
+		"ID"							"70160"	
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"AbilityTextureName"			"mjz_chinese_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"ItemCost"						"1000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "0"						//不可买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"1"						//可以叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"2"
+	}
+	"item_mjz_chinese_gold_3_sell"
+	{
+		"ID"							"70162"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"ItemCost"						"10000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "0"						//不可买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"1"						//可以叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"3"
+	}
+	"item_mjz_chinese_gold_4_sell"
+	{
+		"ID"							"70164"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"ItemCost"						"100000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "0"						//不可买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"1"						//可以叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"4"
+	}
+	"item_mjz_chinese_gold_5_sell"
+	{
+		"ID"							"70166"	
+		"BaseClass"						"item_lua"	//"item_datadriven"
+    	"ScriptFile"                    "items/item_mjz_chinese_gold.lua"
+		"Model"							"models/props_gameplay/gold_coin001.vmdl"
+		"AbilityTextureName"			"mjz_chinese_gold"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"ItemCost"						"1000000"
+		"ItemShopTags"					"mjz;gold"
+		"ItemQuality"					"artifact"
+		"ItemAliases"					"gold"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		"ShouldBeSuggested"				"1"
+		"ItemShareability"              "ITEM_FULLY_SHAREABLE"	//可分享
+		"ItemKillable"                  "0"						//不可A
+		"ItemPurchasable"               "0"						//不可买
+		"ItemSellable"                  "0"						//不可卖
+		"ItemStackable"					"1"						//可以叠
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		"MaxUpgradeLevel"				"5"
+		"ItemBaseLevel"					"5"
+	}
+
+
+	

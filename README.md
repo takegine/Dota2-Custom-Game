@@ -27,6 +27,7 @@
 | [极速兔子](Item/speed_rabbit/README.md)            | 提高移速 |
 | [重生十字架](Item/mjz_reincarnate_stone/README.md) | 原地复活 |
 | [无敌药水](Item/mjz_invincible_potion/README.md)   | 无敌时间 |
+| [元宝](Item/mjz_chinese_gold/README.md)            | 金钱分享 |
 
 
 
