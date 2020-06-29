@@ -57,6 +57,7 @@
 | [晕锤 系列](Item/mjz_basher/README.md)              | 增加到五个等级，提高属性加成               |
 | [辉耀 系列](Item/mjz_radiance/README.md)            | 增加到五个等级，提高属性加成               |
 | [莫尔迪基安的臂章](Item/mjz_armlet/README.md)       | 增加到五个等级，提高属性加成               |
+| [深渊之刃](Item/mjz_abyssal_blade/README.md)        | 增加到五个等级，提高属性加成               |
 
 
 
