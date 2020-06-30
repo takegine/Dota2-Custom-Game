@@ -96,11 +96,12 @@ if IsServer() then
 	
 		if attacker == self:GetParent() then
 			local proc_chance = GetTalentSpecialValueFor(ability, "proc_chance")
-			
-			
-			if RollPercentage(proc_chance) then
-				self:_LaunchSpark(target)
-				self:_Update_BonusDamage()
+			local isTarget = UnitFilter(target, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, attacker:GetTeamNumber()) == UF_SUCCESS
+			if isTarget then
+				if RollPercentage(proc_chance) then
+					self:_LaunchSpark(target)
+					self:_Update_BonusDamage()
+				end
 			end
 		end
 	end
