@@ -22,7 +22,8 @@
 	"item_mjz_heart_2"
 	{
 		"ID"							"71114"
-		"BaseClass"						"item_heart"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_heart.lua"
 		"AbilityTextureName"			"mjz_heart"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -59,7 +60,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"health_regen_rate"		"5"
+				"health_regen_rate"		"1"
 			}
 			"05"
 			{
@@ -95,7 +96,8 @@
 	"item_mjz_heart_3"
 	{
 		"ID"							"71116"
-		"BaseClass"						"item_heart"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_heart.lua"
 		"AbilityTextureName"			"mjz_heart"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -132,7 +134,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"health_regen_rate"		"5"
+				"health_regen_rate"		"1"
 			}
 			"05"
 			{
@@ -168,7 +170,8 @@
 	"item_mjz_heart_4"
 	{
 		"ID"							"71118"
-		"BaseClass"						"item_heart"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_heart.lua"
 		"AbilityTextureName"			"mjz_heart"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -205,7 +208,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"health_regen_rate"		"5"
+				"health_regen_rate"		"1"
 			}
 			"05"
 			{
@@ -241,7 +244,8 @@
 	"item_mjz_heart_5"
 	{
 		"ID"							"71120"
-		"BaseClass"						"item_heart"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_heart.lua"
 		"AbilityTextureName"			"mjz_heart"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -278,7 +282,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"health_regen_rate"		"5"
+				"health_regen_rate"		"1"
 			}
 			"05"
 			{
