@@ -21,7 +21,8 @@
 	"item_mjz_assault_2"
 	{
 		"ID"							"112"
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua" //"item_datadriven"
+		"ScriptFile"                    "items/item_mjz_assault.lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"		    "mjz_assault"
 		"AbilityCastRange"				"1200 1400 1600 1800 2000"
@@ -70,68 +71,6 @@
 				"aura_negative_armor"	"-5 -8 -11 -14 -17"
 			}			
 		}
-
-		"Modifiers"
-		{
-			"modifier_item_mjz_assault_2"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%bonus_armor"
-				}
-			}
-
-			"modifier_item_mjz_assault_2_friendly_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_2_buff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-				"Aura_ApplyToCaster" 	"1"
-			}
-
-			"modifier_item_mjz_assault_2_buff"
-			{
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%aura_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_positive_armor"
-				}
-			}
-			
-			"modifier_item_mjz_assault_2_enemy_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_2_debuff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-			}
-			
-			"modifier_item_mjz_assault_2_debuff"
-			{
-				"IsDebuff"              "1"
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_negative_armor"
-				}
-			}
-		}
 	}
 	//=================================================================================================================
 	// Recipe: Assault Cuirass				强袭胸甲 LVL 3
@@ -155,7 +94,8 @@
 	"item_mjz_assault_3"
 	{
 		"ID"							"112"
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua" //"item_datadriven"
+		"ScriptFile"                    "items/item_mjz_assault.lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"		    "mjz_assault"
 		"AbilityCastRange"				"1200 1400 1600 1800 2000"
@@ -204,68 +144,6 @@
 				"aura_negative_armor"	"-5 -8 -11 -14 -17"
 			}			
 		}
-
-		"Modifiers"
-		{
-			"modifier_item_mjz_assault_3"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%bonus_armor"
-				}
-			}
-
-			"modifier_item_mjz_assault_3_friendly_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_3_buff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-				"Aura_ApplyToCaster" 	"1"
-			}
-
-			"modifier_item_mjz_assault_3_buff"
-			{
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%aura_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_positive_armor"
-				}
-			}
-			
-			"modifier_item_mjz_assault_3_enemy_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_3_debuff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-			}
-			
-			"modifier_item_mjz_assault_3_debuff"
-			{
-				"IsDebuff"              "1"
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_negative_armor"
-				}
-			}
-		}
 	}
 	//=================================================================================================================
 	// Recipe: Assault Cuirass				强袭胸甲 LVL 4
@@ -289,7 +167,8 @@
 	"item_mjz_assault_4"
 	{
 		"ID"							"112"
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua" //"item_datadriven"
+		"ScriptFile"                    "items/item_mjz_assault.lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"		    "mjz_assault"
 		"AbilityCastRange"				"1200 1400 1600 1800 2000"
@@ -338,68 +217,6 @@
 				"aura_negative_armor"	"-5 -8 -11 -14 -17"
 			}			
 		}
-
-		"Modifiers"
-		{
-			"modifier_item_mjz_assault_4"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%bonus_armor"
-				}
-			}
-
-			"modifier_item_mjz_assault_4_friendly_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_4_buff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-				"Aura_ApplyToCaster" 	"1"
-			}
-
-			"modifier_item_mjz_assault_4_buff"
-			{
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%aura_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_positive_armor"
-				}
-			}
-			
-			"modifier_item_mjz_assault_4_enemy_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_4_debuff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-			}
-			
-			"modifier_item_mjz_assault_4_debuff"
-			{
-				"IsDebuff"              "1"
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_negative_armor"
-				}
-			}
-		}
 	}
 	//=================================================================================================================
 	// Recipe: Assault Cuirass				强袭胸甲 LVL 5
@@ -423,7 +240,8 @@
 	"item_mjz_assault_5"
 	{
 		"ID"							"112"
-		"BaseClass"						"item_datadriven"
+		"BaseClass"						"item_lua" //"item_datadriven"
+		"ScriptFile"                    "items/item_mjz_assault.lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"		    "mjz_assault"
 		"AbilityCastRange"				"1200 1400 1600 1800 2000"
@@ -471,68 +289,6 @@
 				"var_type"				"FIELD_INTEGER"
 				"aura_negative_armor"	"-5 -8 -11 -14 -17"
 			}			
-		}
-
-		"Modifiers"
-		{
-			"modifier_item_mjz_assault_5"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%bonus_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%bonus_armor"
-				}
-			}
-
-			"modifier_item_mjz_assault_5_friendly_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_5_buff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-				"Aura_ApplyToCaster" 	"1"
-			}
-
-			"modifier_item_mjz_assault_5_buff"
-			{
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"		"%aura_attack_speed"
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_positive_armor"
-				}
-			}
-			
-			"modifier_item_mjz_assault_5_enemy_aura"
-			{
-				"Passive"				"1"
-				"IsHidden"				"1"
-				
-				"Aura" 					"modifier_item_mjz_assault_5_debuff"
-				"Aura_Radius" 			"%aura_radius"
-				"Aura_Teams" 			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types" 			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-			}
-			
-			"modifier_item_mjz_assault_5_debuff"
-			{
-				"IsDebuff"              "1"
-				"TextureName"		    "item_mjz_assault"
-				
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%aura_negative_armor"
-				}
-			}
 		}
 	}
 	
