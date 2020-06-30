@@ -24,7 +24,8 @@
 	"item_mjz_skadi_2"
 	{
 		"ID"							"70160"	
-		"BaseClass"						"item_skadi"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_skadi.lua"
 		"AbilityTextureName"			"mjz_skadi"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -64,7 +65,7 @@
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cold_attack_speed"		"-45"
+				"cold_attack_speed"		"-45 -90 -120 -150 -180"
 			}
 			"06"
 			{
@@ -100,7 +101,8 @@
 	"item_mjz_skadi_3"
 	{
 		"ID"							"70162"	
-		"BaseClass"						"item_skadi"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_skadi.lua"
 		"AbilityTextureName"			"mjz_skadi"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -140,7 +142,7 @@
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cold_attack_speed"		"-45"
+				"cold_attack_speed"		"-45 -90 -120 -150 -180"
 			}
 			"06"
 			{
@@ -176,7 +178,8 @@
 	"item_mjz_skadi_4"
 	{
 		"ID"							"70164"	
-		"BaseClass"						"item_skadi"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_skadi.lua"
 		"AbilityTextureName"			"mjz_skadi"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -216,7 +219,7 @@
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cold_attack_speed"		"-45"
+				"cold_attack_speed"		"-45 -90 -120 -150 -180"
 			}
 			"06"
 			{
@@ -252,7 +255,8 @@
 	"item_mjz_skadi_5"
 	{
 		"ID"							"70166"	
-		"BaseClass"						"item_skadi"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_skadi.lua"
 		"AbilityTextureName"			"mjz_skadi"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -292,7 +296,7 @@
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cold_attack_speed"		"-45"
+				"cold_attack_speed"		"-45 -90 -120 -150 -180"
 			}
 			"06"
 			{
