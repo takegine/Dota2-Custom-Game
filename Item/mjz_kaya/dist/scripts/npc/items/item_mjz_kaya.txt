@@ -22,8 +22,9 @@
 	"item_mjz_kaya_2"
 	{
 		"ID"							"71259"
-		"BaseClass"						"item_kaya"
-		"AbilityTextureName"			"mjz_kaya"	
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_kaya.lua"
+		"AbilityTextureName"			"mjz_kaya"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 		"ItemCost"						"3050"
@@ -78,7 +79,8 @@
 	"item_mjz_kaya_3"
 	{
 		"ID"							"71261"
-		"BaseClass"						"item_kaya"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_kaya.lua"
 		"AbilityTextureName"			"mjz_kaya"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -134,7 +136,8 @@
 	"item_mjz_kaya_4"
 	{
 		"ID"							"71263"
-		"BaseClass"						"item_kaya"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_kaya.lua"
 		"AbilityTextureName"			"mjz_kaya"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
@@ -190,7 +193,8 @@
 	"item_mjz_kaya_5"
 	{
 		"ID"							"71265"
-		"BaseClass"						"item_kaya"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_kaya.lua"
 		"AbilityTextureName"			"mjz_kaya"	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
