@@ -22,22 +22,23 @@
 	"item_mjz_bloodstone_2"
 	{
 		"ID"							"121"
-		"BaseClass"						"item_bloodstone"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_bloodstone.lua"
 		"AbilityTextureName"			"mjz_bloodstone"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"2"
 
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"250.0"
+		"AbilityCooldown"				"85"
 
 		"ItemCost"						"4900"
 		"ItemShopTags"					"regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bs;bloodstone"
-		"ItemInitialCharges"			"14"
-		"ItemDisplayCharges"			"1"
+		//"ItemInitialCharges"			"14"
+		//"ItemDisplayCharges"			"1"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"AllowedInBackpack"				"0"
+		//"AllowedInBackpack"				"0"
 		"ShouldBeSuggested"				"1"
 
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
@@ -70,31 +71,6 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"mana_regen_multiplier"		"200 400 600 800 1000"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"regen_per_charge"		"0.3"
-			}
-			"07"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"death_charges"				"3"
-			}
-			"08"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"kill_charges"			"1"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"charge_range"			"1600"
-			}
-			"10"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"initial_charges_tooltip"	"14"
 			}
 			"11"
 			{
@@ -130,22 +106,23 @@
 	"item_mjz_bloodstone_3"
 	{
 		"ID"							"121"
-		"BaseClass"						"item_bloodstone"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_bloodstone.lua"
 		"AbilityTextureName"			"mjz_bloodstone"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"2"
 
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"250.0"
+		"AbilityCooldown"				"85"
 
 		"ItemCost"						"4900"
 		"ItemShopTags"					"regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bs;bloodstone"
-		"ItemInitialCharges"			"14"
-		"ItemDisplayCharges"			"1"
+		//"ItemInitialCharges"			"14"
+		//"ItemDisplayCharges"			"1"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"AllowedInBackpack"				"0"
+		//"AllowedInBackpack"				"0"
 		"ShouldBeSuggested"				"1"
 
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
@@ -178,31 +155,6 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"mana_regen_multiplier"		"200 400 600 800 1000"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"regen_per_charge"		"0.3"
-			}
-			"07"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"death_charges"				"3"
-			}
-			"08"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"kill_charges"			"1"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"charge_range"			"1600"
-			}
-			"10"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"initial_charges_tooltip"	"14"
 			}
 			"11"
 			{
@@ -238,22 +190,23 @@
 	"item_mjz_bloodstone_4"
 	{
 		"ID"							"121"
-		"BaseClass"						"item_bloodstone"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_bloodstone.lua"
 		"AbilityTextureName"			"mjz_bloodstone"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"2"
 
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"250.0"
+		"AbilityCooldown"				"85"
 
 		"ItemCost"						"4900"
 		"ItemShopTags"					"regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bs;bloodstone"
-		"ItemInitialCharges"			"14"
-		"ItemDisplayCharges"			"1"
+		//"ItemInitialCharges"			"14"
+		//"ItemDisplayCharges"			"1"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"AllowedInBackpack"				"0"
+		//"AllowedInBackpack"				"0"
 		"ShouldBeSuggested"				"1"
 
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
@@ -286,31 +239,6 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"mana_regen_multiplier"		"200 400 600 800 1000"
-			}
-			"06"
-			{
-				"var_type"				"FIELD_FLOAT"
-				"regen_per_charge"		"0.3"
-			}
-			"07"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"death_charges"				"3"
-			}
-			"08"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"kill_charges"			"1"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"charge_range"			"1600"
-			}
-			"10"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"initial_charges_tooltip"	"14"
 			}
 			"11"
 			{
@@ -346,22 +274,23 @@
 	"item_mjz_bloodstone_5"
 	{
 		"ID"							"121"
-		"BaseClass"						"item_bloodstone"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_bloodstone.lua"
 		"AbilityTextureName"			"mjz_bloodstone"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel"				"2"
 
 		"AbilityCastPoint"				"0.0"
-		"AbilityCooldown"				"250.0"
+		"AbilityCooldown"				"85"
 
 		"ItemCost"						"4900"
 		"ItemShopTags"					"regen_health;regen_mana;mana_pool;health_pool"
 		"ItemQuality"					"epic"
 		"ItemAliases"					"bs;bloodstone"
-		"ItemInitialCharges"			"14"
-		"ItemDisplayCharges"			"1"
+		//"ItemInitialCharges"			"14"
+		//"ItemDisplayCharges"			"1"
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
-		"AllowedInBackpack"				"0"
+		//"AllowedInBackpack"				"0"
 		"ShouldBeSuggested"				"1"
 
 		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
@@ -395,30 +324,104 @@
 				"var_type"					"FIELD_INTEGER"
 				"mana_regen_multiplier"		"200 400 600 800 1000"
 			}
+			"11"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"mana_cost_percentage" 		"30"
+			}
+			"12"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"restore_duration" 			"2.0"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Recipe: Bloodstone				终极血精石
+	//=================================================================================================================
+	"item_recipe_mjz_bloodstone_ultimate"
+	{
+		"ID"							"120"
+		"Model"							"models/props_gameplay/recipe.mdl"
+		"BaseClass"						"item_datadriven"
+		
+		"ItemCost"						"0"	
+		"ItemShopTags"					""
+		
+		"ItemRecipe"					"1"
+		"ItemResult"					"item_mjz_bloodstone_ultimate"
+		"ItemRequirements"
+		{
+			"01"						"item_mjz_bloodstone_5;item_mjz_kaya_5"
+		}
+	}
+	"item_mjz_bloodstone_ultimate"
+	{
+		"ID"							"121"
+		"BaseClass"						"item_lua"
+		"ScriptFile"                    "items/item_mjz_bloodstone.lua"
+		"AbilityTextureName"			"mjz_bloodstone"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"FightRecapLevel"				"2"
+
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"85"
+
+		"ItemCost"						"4900"
+		"ItemShopTags"					"regen_health;regen_mana;mana_pool;health_pool"
+		"ItemQuality"					"epic"
+		"ItemAliases"					"bs;bloodstone"
+		//"ItemInitialCharges"			"14"
+		//"ItemDisplayCharges"			"1"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+		//"AllowedInBackpack"				"0"
+		"ShouldBeSuggested"				"1"
+
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_ALWAYS"	//可以拆分
+		// "MaxUpgradeLevel"				"5"
+		// "ItemBaseLevel"					"5"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"2666"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_mana"			"2666"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_health_regen"	"38"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana_regen"		"20"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"mana_regen_multiplier"		"1234"
+			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"regen_per_charge"		"0.3"
+				"bonus_intellect"		"30"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"death_charges"				"3"
+				"spell_amp"				"30"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"kill_charges"			"1"
-			}
-			"09"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"charge_range"			"1600"
-			}
-			"10"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"initial_charges_tooltip"	"14"
+				"manacost_reduction"			"36"
 			}
 			"11"
 			{
