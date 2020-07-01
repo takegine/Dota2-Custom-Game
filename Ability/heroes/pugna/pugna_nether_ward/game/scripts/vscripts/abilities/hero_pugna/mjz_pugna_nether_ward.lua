@@ -23,9 +23,11 @@ if IsServer() then
 		local position = point
 		local unit_name = 'npc_dota_mjz_pugna_nether_ward'
 		local unit = CreateUnitByName(unit_name, position, false, caster, caster, caster:GetTeamNumber())
-		unit:AddNewModifier(caster, ability, "modifier_kill", {duration = duration})
-		unit:AddNewModifier(caster, ability, "modifier_mjz_pugna_nether_ward", {duration = duration})
-
+		if unit and IsValidEntity(unit) then
+			FindClearSpaceForUnit(unit, position, false)
+			unit:AddNewModifier(caster, ability, "modifier_kill", {duration = duration})
+			unit:AddNewModifier(caster, ability, "modifier_mjz_pugna_nether_ward", {duration = duration})
+		end
 	end
 end
 
