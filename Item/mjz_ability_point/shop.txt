@@ -1,0 +1,9 @@
+"dota_shops"
+{
+	"consumables"
+	{
+		"item"		"item_mjz_ability_point"
+
+	}
+	
+}
