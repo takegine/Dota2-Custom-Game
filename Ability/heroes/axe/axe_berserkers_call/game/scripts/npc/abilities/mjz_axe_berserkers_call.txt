@@ -34,14 +34,14 @@
 			}
 			"03"
 			{
-				"var_type"				"FIELD_FLOAT"
-				"duration"				"2.0 2.4 2.8 3.2"
-			}
-			"02"
-			{
 				"var_type"				"FIELD_INTEGER"
 				"bonus_armor_per"		"50"
 			}	
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.0 2.4 2.8 3.2"
+			}
 		}
 
 		"precache"

@@ -152,7 +152,7 @@ if IsServer() then
 		local bonus_armor_base = ability:GetSpecialValueFor( "bonus_armor")
 		local bonus_armor_per = ability:GetSpecialValueFor( "bonus_armor_per")
 	
-		local current_armor = unit:GetPhysicalArmorValue()
+		local current_armor = unit:GetPhysicalArmorValue(false)
 		
 		local bonus_armor = bonus_armor_base + current_armor * (bonus_armor_per / 100.0)
 		self:SetStackCount(bonus_armor)
