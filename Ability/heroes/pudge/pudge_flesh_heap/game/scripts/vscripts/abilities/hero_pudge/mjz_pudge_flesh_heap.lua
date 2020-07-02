@@ -43,25 +43,59 @@ if IsServer() then
 		local caster = self:GetCaster()
         local parent = self:GetParent()
         local ability = self:GetAbility()
+        local ability_level = self:GetAbility():GetLevel()
 
         local magic_damage_reduction_pct = ability:GetSpecialValueFor("magic_damage_reduction_pct")			
         local primary_attribute_per = ability:GetSpecialValueFor("primary_attribute_per")			
 
         local m_mrb = parent:FindModifierByName("modifier_mjz_pudge_flesh_heap_mrb")
-        if m_mrb then
-            m_mrb:SetStackCount(magic_damage_reduction_pct) 
+        if m_mrb and ability_level > 0 then
+            if m_mrb:GetStackCount() ~= magic_damage_reduction_pct then
+                m_mrb:SetStackCount(magic_damage_reduction_pct) 
+            end
 		else
 			parent:AddNewModifier(caster, ability, "modifier_mjz_pudge_flesh_heap_mrb", {})
         end
 
         local m_str = parent:FindModifierByName("modifier_mjz_pudge_flesh_heap_str")
-        if m_str then
-            local bonus_str = self:CalcBonusStrength(parent, primary_attribute_per)
-            m_str:SetStackCount(bonus_str)
+        if m_str and ability_level > 0  then
+            local bonus_str = self:CalcBonusPrimaryStat(parent, primary_attribute_per)
+            if m_str:GetStackCount() ~= bonus_str then
+                m_str:SetStackCount(bonus_str)
+            end
 		else
 			parent:AddNewModifier(caster, ability, "modifier_mjz_pudge_flesh_heap_str", {})
         end
 
+    end
+
+    function modifier_class:CalcBonusPrimaryStat(unit, primary_attribute_per )
+        local caster = self:GetCaster()
+        local ability = self:GetAbility()
+        local STRENGTH = 0
+        local AGILITY = 1
+        local INTELLIGENCE = 2
+        local str_bonus = 0 
+        local agi_bonus = 0 
+        local int_bonus = 0 
+        local bonus = 0
+
+        -- unit:CalculateStatBonus()	-- 	重新计算全部属性
+
+        local pa = unit:GetPrimaryAttribute()
+        if pa == STRENGTH  then
+            bonus = unit:GetBaseStrength() * (primary_attribute_per / 100)
+            str_bonus = bonus
+        elseif pa == AGILITY  then
+            bonus = unit:GetBaseAgility() * (primary_attribute_per / 100)
+            agi_bonus = bonus
+        elseif pa == INTELLIGENCE  then
+            bonus = unit:GetBaseIntellect() * (primary_attribute_per / 100)
+            int_bonus = bonus
+        end
+        
+        if math.abs( bonus ) < 1 then bonus = 0 end
+        return bonus
     end
 
     function modifier_class:CalcBonusStrength(unit, primary_attribute_per )

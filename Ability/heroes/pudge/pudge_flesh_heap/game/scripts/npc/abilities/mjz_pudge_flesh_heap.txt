@@ -17,7 +17,7 @@
 			"02"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"primary_attribute_per"			"20 26 32 40"
+				"primary_attribute_per"			"20 30 40 50"
 				"LinkedSpecialBonus"			"special_bonus_unique_mjz_pudge_0302"
 			}
 		}
@@ -48,7 +48,7 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"value"						"10"
+				"value"						"30"
 			}
 		}
 	}
