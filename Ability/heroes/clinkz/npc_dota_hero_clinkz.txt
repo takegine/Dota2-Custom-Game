@@ -1,0 +1,8 @@
+
+	"npc_dota_hero_clinkz_mjz"			// 克林克兹（小骷髅）
+	{
+		"override_hero"			"npc_dota_hero_clinkz"
+		
+		"Ability1"				"mjz_clinkz_soul_pact"
+		"Ability6"				"mjz_clinkz_death_pact"
+	}
