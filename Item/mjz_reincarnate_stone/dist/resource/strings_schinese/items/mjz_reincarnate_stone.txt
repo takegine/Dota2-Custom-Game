@@ -1,0 +1,7 @@
+
+		//>>>> 重生十字架
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone"							"重生十字架"
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_Description"				"<h1>被动</h1>英雄死亡时将会消耗一个重生十字架并且满状态复活。"		
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_cast_time"					"效果延迟："
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_Lore"						""
+		//<<<<

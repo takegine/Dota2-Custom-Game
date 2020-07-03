@@ -1,0 +1,7 @@
+
+		//>>>> Reborn Cross
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone"							"Reborn Cross"
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_Description"				"<h1>Passive</h1>When a hero dies, he will consume a reborn cross and resurrect the full state."		
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_cast_time"					"Effect Delay: "
+		"DOTA_Tooltip_Ability_item_mjz_reincarnate_stone_Lore"						""
+		//<<<<

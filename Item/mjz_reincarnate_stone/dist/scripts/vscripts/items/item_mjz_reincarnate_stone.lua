@@ -1,5 +1,5 @@
 
-require("lib.timers")
+--require("lib.timers")
 
 function Ressurection(keys)
 	local killedUnit = EntIndexToHScript( keys.caster_entindex )
