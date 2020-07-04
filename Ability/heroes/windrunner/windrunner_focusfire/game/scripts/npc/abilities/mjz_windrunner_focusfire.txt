@@ -41,6 +41,7 @@
 			{
 				"var_type"						"FIELD_INTEGER"
 				"damage_reduction_scepter"		"-30 -15 -0"
+				"RequiresScepter"		"1"
 			}						
 			"04"
 			{
@@ -62,6 +63,7 @@
 			{
 				"var_type"						"FIELD_FLOAT"
 				"cooldown_scepter"				"15.0 15.0 15.0"
+				"RequiresScepter"		"1"
 			}
 			"11"
 			{

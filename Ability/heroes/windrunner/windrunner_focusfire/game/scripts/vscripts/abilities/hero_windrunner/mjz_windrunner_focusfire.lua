@@ -12,6 +12,11 @@ LinkLuaModifier(MODIFIER_DEBUFF_NAME, THIS_LUA, LUA_MODIFIER_MOTION_NONE)
 mjz_windrunner_focusfire = class({})
 local ability_class = mjz_windrunner_focusfire
 
+function ability_class:GetCastRange(vLocation, hTarget)
+	-- return self.BaseClass.GetCastRange(self, vLocation, hTarget) 
+	return self:GetCaster():Script_GetAttackRange()
+end
+
 
 function ability_class:GetCooldown(iLevel)
 	if self:GetCaster():HasScepter() then
@@ -198,7 +203,7 @@ if IsServer() then
 		local ability = self:GetAbility()
 		local target = ability.focusfire_target
 
-		local radius = parent:GetBaseAttackRange()
+		local radius = parent:Script_GetAttackRange()
 		local enemies = FindUnitsInRadius(
 			parent:GetTeamNumber(),
 			parent:GetAbsOrigin(),
