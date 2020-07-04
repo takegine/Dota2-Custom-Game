@@ -52,7 +52,7 @@ function modifier_class:_Init( kv )
 	end
 
 	local unit = self:GetParent()
-	local bonus = unit:GetPhysicalArmorValue() * self.armor_reduction_percent / 100
+	local bonus = unit:GetPhysicalArmorValue(false) * self.armor_reduction_percent / 100
 	if math.abs( bonus ) < 1 then bonus = 1 end
 	self.armor_bonus = bonus * -1
 
