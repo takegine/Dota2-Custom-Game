@@ -180,10 +180,32 @@ function MainGame:OnPlayerReconnect(keys)
 end
 
 function MainGame:OnPlayerChat( keys )
-    --if keys then DeepPrintTable(keys) end
+     --if keys then DeepPrintTable(keys) end
     local teamonly = keys.teamonly  -- 是否是团队聊天
-    local userid = keys.userid      -- 玩家id
+	local userid = keys.userid      -- 玩家id
+	local playerid = keys.playerid	
 	local text = keys.text          -- 内容
+    --if PlayerId and PlayerId >= 0 then
+		--local teamOnly = keys.teamonly
+		--local SteamdID = PlayerResource:GetSteamAccountID(PlayerId)
+		--local player = PlayerResource:GetPlayer(PlayerId)
+		--local playerName = PlayerResource:GetPlayerName(PlayerId)
+		--local hero = player:GetAssignedHero()
+		--local team = PlayerResource:GetTeam(PlayerId)
+		--local hero_table = PlayerResource:GetSelectedHeroEntity(PlayerId)	
+		--local commands = {}
+		--for v in string.gmatch(string.sub(text, 2), "%S+") do 
+		--	table.insert(commands, v) 
+		--end		
+		--local command = table.remove(commands, 1)
+		--if command == "-" or not command then return end
+		--local prob =  text:find(" ") or 0
+		--local numbers = string.sub(text, prob+1)
+		--local cmd = CHAT_COMMANDS[command:upper()]	
+		--if cmd --[[and cmd.ACCESS <= GetAccesCheatsPlayer(PlayerId)]] then
+		--	cmd.funcs(numbers,PlayerId)
+		--end 
+	--end
 	if self._ChatCommand then
         self:_ChatCommand(userid, text)
     end

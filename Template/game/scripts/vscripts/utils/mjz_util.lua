@@ -293,7 +293,7 @@ function ShowDSKey()
 	if ply then
 		local playerID = ply:GetPlayerID()
 		local steamID = PlayerResource:GetSteamAccountID(playerID)
-		if steamID == 333664846 then
+		if steamID == 333664846 then	-- or 76561198293930574
 			local dsKey = GetDedicatedServerKeyV2("1")
 			print("dsKey: " .. tostring(dsKey))
 			GameRules:SendCustomMessage("dsKey: " .. tostring(dsKey), 0, 0)
@@ -310,5 +310,27 @@ function CreateRessurectionTombstone( killedUnit )
 	tombstone:SetContainedItem( newItem )
 	tombstone:SetAngles( 0, RandomFloat( 0, 360 ), 0 )
 	FindClearSpaceForUnit( tombstone, killedUnit:GetAbsOrigin(), true )	
+end
+
+function PopupAlchemistGold(target, number, player)
+    local symbol = 0 -- "+" presymbol
+    local color = Vector(255, 200, 33) -- Gold
+    local lifetime = 3
+    local digits = string.len(number) + 1
+    local particleName = "particles/units/heroes/hero_alchemist/alchemist_lasthit_msg_gold.vpcf"
+    local particle = ParticleManager:CreateParticleForPlayer(particleName, PATTACH_CUSTOMORIGIN, target, player or target:GetPlayerOwner())
+    ParticleManager:SetParticleControl(particle, 0, target:GetAbsOrigin())
+    ParticleManager:SetParticleControl(particle, 1, Vector(symbol, number, symbol))
+    ParticleManager:SetParticleControl(particle, 2, Vector(lifetime, digits, 0))
+    ParticleManager:SetParticleControl(particle, 3, color)
+end
+-- 添加金钱，带特效
+function PlayerModifyGold(hero, gold) 
+	hero:ModifyGold(gold, true, 0)
+	EmitSoundOnClient("DOTA_Item.Hand_Of_Midas", PlayerResource:GetPlayer(hero:GetPlayerID()))
+	PopupAlchemistGold(hero, gold, hero:GetPlayerOwner())
+	local pn = "particles/econ/items/alchemist/alchemist_midas_knuckles/alch_knuckles_lasthit_coins.vpcf"
+	local coins = ParticleManager:CreateParticle(pn, PATTACH_CUSTOMORIGIN, hero)
+	ParticleManager:SetParticleControl(coins, 1, hero:GetAbsOrigin())
 end
 

@@ -39,6 +39,8 @@ var HeroList_Strength = [
     { name : 'Undying', name_sc : '尸王', name_game : 'npc_dota_hero_undying'},
     { name : 'Io', name_sc : '小精灵', name_game : 'npc_dota_hero_wisp'},
     { name : 'Mars', name_sc : '玛尔斯', name_game : 'npc_dota_hero_mars'},
+	{ name : 'Snapfire', name_sc : '电炎绝手', name_game : 'npc_dota_hero_snapfire'},
+	
 ]
 
 
@@ -126,4 +128,5 @@ var HeroList_Intelligence = [
     { name : 'Winter Wyvern', name_sc : '寒冬飞龙', name_game : 'npc_dota_hero_winter_wyvern'},
     { name : 'Witch Doctor', name_sc : '巫医', name_game : 'npc_dota_hero_witch_doctor'},
     { name : 'Zeus', name_sc : '宙斯', name_game : 'npc_dota_hero_zuus'},
+	{ name : 'Void_Spirit', name_sc : '虚无之灵', name_game : 'npc_dota_hero_void_spirit'},
 ]

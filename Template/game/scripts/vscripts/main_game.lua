@@ -15,6 +15,19 @@ if MainGame == nil then
 	MainGame = class({})
 end
 
+require('libraries/timers')
+require('libraries/notifications')
+require('libraries/animations')
+require('libraries/keyvalues')
+--	require('libraries/illusionmanager')
+require('libraries/fun')()
+require('libraries/functional')
+require('libraries/playerresource')
+require('libraries/playertables')
+require('libraries/gold')
+require('libraries/rgb_to_hex')
+require('libraries/wearables')
+require('libraries/wearables_warmful_ancient')
 
 require("lib/timers_v1_05")
 require("utils/mjz_util")
